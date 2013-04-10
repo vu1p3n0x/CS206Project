@@ -11,13 +11,12 @@ namespace CS206Project
     {
         public int number;
         enum suits { Spades, Hearts, Diamonds, Clubs };
-        public suits cardSuit;
         public bool visible;
 
-        public Card(int newNumber, suits newSuit)
+        public Card(int newNumber)
         {
             number = newNumber;
-            cardSuit = newSuit;
+            visible = false;//defaults to false
         }
 
     }
