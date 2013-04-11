@@ -16,13 +16,17 @@ namespace CS206Project
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public GraphicsDeviceManager graphics;
+        public SpriteBatch spriteBatch;
+
+        Stack<Screen> screens;
+        Texture2D whatever;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            screens = new Stack<Screen>();
         }
 
         /// <summary>
@@ -33,8 +37,8 @@ namespace CS206Project
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            // screens.Push(MainScreen); 
+            // screens.Peek().Initialize(this);
             base.Initialize();
         }
 
@@ -46,6 +50,7 @@ namespace CS206Project
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            whatever = Content.Load<Texture2D>("card_images.png");
 
             // TODO: use this.Content to load your game content here
         }
@@ -66,6 +71,42 @@ namespace CS206Project
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // if screen requests to be removed, then remove it
+            if (!screens.Peek().IsActive())
+            {
+                // screen wants to be replaced with new screen
+                if (screens.Peek().HasNextScreen())
+                {
+                    Screen newscreen = screens.Peek().GetNextScreen();
+                    screens.Pop();
+                    screens.Push(newscreen);
+                    screens.Peek().Initialize(this);
+                }
+                // screen simply wants to be removed
+                else
+                {
+                    screens.Pop();
+                }
+            }
+            else
+            {
+                // screen wishes to add a screen on top of it
+                if (screens.Peek().HasNextScreen())
+                {
+                    screens.Push(screens.Peek().GetNextScreen());
+                }
+            }
+
+            // exit the program if there are no screens
+            if (screens.Count == 0)
+                this.Exit();
+            else
+            {
+                // exit the program if something wen wrong during the update
+                if (screens.Peek().Update(this, gameTime))
+                    this.Exit();
+            }
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -81,10 +122,20 @@ namespace CS206Project
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
+            spriteBatch.Begin();
 
-            // TODO: Add your drawing code here
+            // exit the program if there are no screens
+            if (screens.Count == 0)
+                this.Exit();
+            else
+            {
+                // exit the program if something wen wrong during the draw
+                if (screens.Peek().Draw(this, gameTime))
+                    this.Exit();
+            }
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
