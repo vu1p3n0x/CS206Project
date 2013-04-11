@@ -115,7 +115,6 @@
     <Compile Include="Game1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\card_images.png" />
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>

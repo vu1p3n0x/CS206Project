@@ -19,12 +19,15 @@ namespace CS206Project
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
+        Texture2D texturetest;
+        SpriteFont MainFont;
         Stack<Screen> screens;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
             screens = new Stack<Screen>();
         }
 
@@ -49,6 +52,9 @@ namespace CS206Project
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            texturetest = Content.Load<Texture2D>("card_images.png");
+            // MainFont = Content.Load<SpriteFont>("mainfont");
 
             // TODO: use this.Content to load your game content here
         }
