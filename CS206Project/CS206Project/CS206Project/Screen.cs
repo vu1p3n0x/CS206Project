@@ -42,4 +42,30 @@ namespace CS206Project
         public abstract bool HasNextScreen();
         public abstract Screen GetNextScreen();
     }
+
+    class ScreenEmpty : Screen
+    {
+        public override bool Initialize(Game1 game)
+        {
+            return true;
+        }
+        public override bool Update(Game1 game, GameTime time)
+        {
+            this.Remove();
+            return true;
+        }
+        public override bool Draw(Game1 game, GameTime time)
+        {
+            return true;
+        }
+
+        public override bool HasNextScreen()
+        {
+            return false;
+        }
+        public override Screen GetNextScreen()
+        {
+            return this;
+        }
+    }
 }
