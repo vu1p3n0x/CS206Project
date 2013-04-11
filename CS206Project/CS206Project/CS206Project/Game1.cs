@@ -37,6 +37,7 @@ namespace CS206Project
         protected override void Initialize()
         {
             // screens.Push(MainScreen); 
+            // screens.Peek().Initialize(this);
             base.Initialize();
         }
 
@@ -77,6 +78,7 @@ namespace CS206Project
                     Screen newscreen = screens.Peek().GetNextScreen();
                     screens.Pop();
                     screens.Push(newscreen);
+                    screens.Peek().Initialize(this);
                 }
                 // screen simply wants to be removed
                 else
