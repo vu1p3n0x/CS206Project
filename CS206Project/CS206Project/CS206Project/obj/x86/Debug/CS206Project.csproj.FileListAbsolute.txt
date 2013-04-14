@@ -1,12 +1,14 @@
-D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.exe
-D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.pdb
-D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.csprojResolveAssemblyReference.cache
-D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.exe
-D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.pdb
+c:\users\brad\documents\visual studio 2010\Projects\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\Table_top copy.xnb
+c:\users\brad\documents\visual studio 2010\Projects\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.exe
+c:\users\brad\documents\visual studio 2010\Projects\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.pdb
+c:\users\brad\documents\visual studio 2010\Projects\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.csprojResolveAssemblyReference.cache
+c:\users\brad\documents\visual studio 2010\Projects\CS206Project\CS206Project\CS206Project\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\brad\documents\visual studio 2010\Projects\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.exe
+c:\users\brad\documents\visual studio 2010\Projects\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.pdb
+C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\Table_top copy.xnb
+C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.exe
+C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.pdb
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.csprojResolveAssemblyReference.cache
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.exe
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.pdb
-C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.exe
-C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.pdb

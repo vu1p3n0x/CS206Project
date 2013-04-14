@@ -7,8 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace CS206Project
 {
     class Settings
-    {
-        int numCards;
+    {int numCards;
         int maxPlayers;
         string playerName;
         int currentCardBack;

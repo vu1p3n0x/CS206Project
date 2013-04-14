@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+
 namespace CS206Project
 {
     class Card
@@ -31,6 +32,5 @@ namespace CS206Project
         {
             return visible;
         }
-
     }
 }

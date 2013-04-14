@@ -20,7 +20,7 @@ namespace CS206Project
         public SpriteBatch spriteBatch;
 
         Texture2D texturetest;
-        SpriteFont MainFont;
+        //SpriteFont MainFont;
         Stack<Screen> screens;
 
         public Game1()
@@ -53,7 +53,7 @@ namespace CS206Project
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            texturetest = Content.Load<Texture2D>("card_images.png");
+            texturetest = Content.Load<Texture2D>("Table_top copy");
             // MainFont = Content.Load<SpriteFont>("mainfont");
 
             // TODO: use this.Content to load your game content here
@@ -144,3 +144,4 @@ namespace CS206Project
         }
     }
 }
+
