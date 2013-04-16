@@ -40,14 +40,11 @@ namespace CS206Project
             else
                 return false;
         }
-        public static bool operator !=(Card lhs, Card rhs)
+        public static bool operator!= (Card lhs, Card rhs)
         {
             return !(lhs == rhs);
         }
 
-        public static Card Blank()
-        {
-            return new Card(0, 0);
-        }
+        public static readonly Card Blank = new Card(0, 0);
     }
 }
