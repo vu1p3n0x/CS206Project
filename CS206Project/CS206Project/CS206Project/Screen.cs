@@ -41,17 +41,17 @@ namespace CS206Project
             return !m_remove;
         }
         
-        private Card[] shuffle(Card[] deck)
+        private List<Card> shuffle(List<Card> deck)
         {
             var rand = new Random();
-            Card[] tempDeck = new Card[deck.Length];
+            List<Card> tempDeck = new List<Card>();
             Card tempCard = Card.Blank;
-            int deckSize = deck.Length;
+            int deckSize = deck.Count;
             bool locationUsed = false;
             for (int i = 0; i < deckSize; i++)
             {
                 tempCard = deck[rand.Next(1, deckSize)];
-                for (int j = 0; j < tempDeck.Length; j++)
+                for (int j = 0; j < tempDeck.Count; j++)
                 {
                     if (tempDeck[j] == tempCard)
                     {
@@ -59,7 +59,7 @@ namespace CS206Project
                     }
                 }
                 if (!locationUsed)
-                    tempDeck[i] = tempCard;
+                    tempDeck.Add(tempCard);
                 locationUsed = false;
             }
             return tempDeck;
