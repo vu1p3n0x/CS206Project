@@ -10,7 +10,7 @@ namespace CS206Project
     class Card
     {
         int number;
-        int suit;//Spade = 1; Club = 2; Heart = 3; Diamond = 4
+        int suit; //Spade = 1; Club = 2; Heart = 3; Diamond = 4
         bool visible;
 
         public Card(int newNumber, int newSuit)
@@ -28,9 +28,14 @@ namespace CS206Project
         {
             return suit;
         }
-        private bool getVisible()
+
+        private bool isVisible()
         {
             return visible;
+        }
+        public void show()
+        {
+            visible = true;
         }
 
         public static bool operator== (Card lhs, Card rhs)
