@@ -9,7 +9,7 @@ namespace CS206Project
     {
         public override bool Initialize(Game1 game)
         {
-            throw new NotImplementedException();
+            return true;
         }
         public override bool LoadContent(Game1 game)
         {
