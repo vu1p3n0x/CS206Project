@@ -32,5 +32,18 @@ namespace CS206Project
         {
             return visible;
         }
+
+        public static bool operator== (Card lhs, Card rhs)
+        {
+            if (rhs.number == lhs.number && rhs.suit == lhs.suit)
+                return true;
+            else
+                return false;
+        }
+
+        public static Card Blank()
+        {
+            return new Card(0, 0);
+        }
     }
 }
