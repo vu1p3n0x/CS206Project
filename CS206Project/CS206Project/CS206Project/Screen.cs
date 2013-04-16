@@ -39,6 +39,31 @@ namespace CS206Project
         {
             return !m_remove;
         }
+        
+        private Card[] shuffle(Card[] deck)
+        {
+            var rand = new Random();
+            Card[] tempDeck = new Card[deck.Length];
+            Card tempCard = Card.Blank;
+            int deckSize = deck.Length;
+            bool locationUsed = false;
+            for (int i = 0; i < deckSize; i++)
+            {
+                tempCard = deck[rand.Next(1, deckSize)];
+                for (int j = 0; j < tempDeck.Length; j++)
+                {
+                    if (tempDeck[j] == tempCard)
+                    {
+                        locationUsed = true;
+                    }
+                }
+                if (!locationUsed)
+                    tempDeck[i] = tempCard;
+                locationUsed = false;
+            }
+            return tempDeck;
+        }
+
         public abstract bool HasNextScreen();
         public abstract Screen GetNextScreen();
     }
