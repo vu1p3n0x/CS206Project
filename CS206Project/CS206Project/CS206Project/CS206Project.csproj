@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card.cs" />
+    <Compile Include="GameScreen.cs" />
     <Compile Include="MainScreen.cs" />
     <Compile Include="Screen.cs" />
     <Compile Include="Settings.cs" />

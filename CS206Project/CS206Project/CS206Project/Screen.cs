@@ -47,8 +47,9 @@ namespace CS206Project
             List<Card> tempDeck = new List<Card>();
             Card tempCard = Card.Blank;
             int deckSize = deck.Count;
+            int i = 0;//counter
             bool locationUsed = false;
-            for (int i = 0; i < deckSize; i++)
+            while(i < deckSize)
             {
                 tempCard = deck[rand.Next(1, deckSize)];
                 for (int j = 0; j < tempDeck.Count; j++)
@@ -59,7 +60,10 @@ namespace CS206Project
                     }
                 }
                 if (!locationUsed)
+                {
                     tempDeck.Add(tempCard);
+                    i++;
+                }
                 locationUsed = false;
             }
             return tempDeck;
