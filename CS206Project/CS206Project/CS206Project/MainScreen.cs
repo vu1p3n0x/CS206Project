@@ -9,6 +9,7 @@ namespace CS206Project
     class MainScreen : Screen
     {
         Texture2D pixel;
+        Texture2D card_images;
 
         public override bool Initialize(Game1 game)
         {
