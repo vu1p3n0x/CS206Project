@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace CS206Project
 {
@@ -10,7 +11,8 @@ namespace CS206Project
     {
         public List<Card> deck;
         public List<Card> discardPile;
-
+        Texture2D table;
+        Rectangle background;
         public void deck_push(Card theCard)
         {
             deck.Add(theCard);
@@ -35,26 +37,31 @@ namespace CS206Project
 
         public override bool Initialize(Game1 game)
         {
+
+            background = new Rectangle(0, 0, 500, 500);
+
             for (int i = 1; i <= 4; i++)
                 for (int j = 1; j <= Game1.KING; j++)
                     deck.Add(new Card(j, i));
             deck = shuffle(deck);
-            throw new NotImplementedException();
+            return true;
         }
 
         public override bool LoadContent(Game1 game)
         {
+            table = game.Content.Load<Texture2D>("Table_top copy");
             return true;
         }
 
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
-            throw new NotImplementedException();
+            game.spriteBatch.Draw(table,background,Color.White);
+            return true;
         }
 
         public override bool HasNextScreen()

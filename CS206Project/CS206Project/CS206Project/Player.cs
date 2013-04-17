@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 namespace CS206Project
 {
-    class Player
+    class Player : PlayerBase
     {
         private string name;                            // name of the player
         private int maxCards;                           // number of cards face-up needed to win this round
