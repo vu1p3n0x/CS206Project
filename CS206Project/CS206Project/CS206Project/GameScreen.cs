@@ -13,6 +13,9 @@ namespace CS206Project
         public List<Card> discardPile;
         Texture2D table;
         Rectangle background;
+        public List<PlayerBase> players;
+
+        int currentPlayer;
         public void deck_push(Card theCard)
         {
             deck.Add(theCard);
@@ -39,6 +42,8 @@ namespace CS206Project
         {
 
             background = new Rectangle(0, 0, 500, 500);
+            currentPlayer = 0;
+            players.Add(new Player());
 
             for (int i = 1; i <= 4; i++)
                 for (int j = 1; j <= Game1.KING; j++)
@@ -55,6 +60,7 @@ namespace CS206Project
 
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
+            players[currentPlayer].Update(game, time, this);
             return true;
         }
 
