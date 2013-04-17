@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 namespace CS206Project
 {
-    class Player
+    class Player : PlayerBase
     {
         private string name;                            // name of the player
         private int maxCards;                           // number of cards face-up needed to win this round
@@ -16,6 +16,7 @@ namespace CS206Project
         
         //default constructor
 
+        public Player() { }
         public void setName(string newName) { name = newName; }
 
         public void setMaxCards(int numCards) { maxCards = numCards; }
@@ -170,7 +171,7 @@ namespace CS206Project
             return true;
         }
 
-        public override bool Update(Game1 game, GameTime time)
+        public override bool Update(Game1 game, GameTime time, GameScreen gamescreen)
         {
             
             return true;

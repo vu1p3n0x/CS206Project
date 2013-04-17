@@ -21,7 +21,7 @@ namespace CS206Project
         // basic override functions
         public abstract bool Initialize(Game1 game);
         public abstract bool LoadContent(Game1 game);
-        public abstract bool Update(Game1 game, GameTime time);
+        public abstract bool Update(Game1 game, GameTime time, GameScreen gamescreen);
         public abstract bool Draw(Game1 game, GameTime time);
     }
 }

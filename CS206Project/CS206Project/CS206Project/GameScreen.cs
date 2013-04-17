@@ -10,6 +10,9 @@ namespace CS206Project
     {
         public List<Card> deck;
         public List<Card> discardPile;
+        public List<PlayerBase> players;
+
+        int currentPlayer;
 
         public void deck_push(Card theCard)
         {
@@ -35,6 +38,9 @@ namespace CS206Project
 
         public override bool Initialize(Game1 game)
         {
+            currentPlayer = 0;
+            players.Add(new Player());
+
             for (int i = 1; i <= 4; i++)
                 for (int j = 1; j <= Game1.KING; j++)
                     deck.Add(new Card(j, i));
@@ -49,6 +55,7 @@ namespace CS206Project
 
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
+            players[currentPlayer].Update(game, time, this);
             throw new NotImplementedException();
         }
 
