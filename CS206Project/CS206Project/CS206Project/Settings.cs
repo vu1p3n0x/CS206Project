@@ -8,13 +8,14 @@ using Microsoft.Xna.Framework;
 namespace CS206Project
 {
     public class Settings
-    {int numCards;
+    {
+        int numCards;
         int maxPlayers;
         string playerName;
         Texture2D images;
-        Rectangle[,] cardBacks = new Rectangle[5,13];
+        public Rectangle[,] cardBacks = new Rectangle[5,13];
 
-        public override bool LoadContent(Game1 game)
+        public bool LoadContent(Game1 game)
         {
             images = game.Content.Load<Texture2D>("card_images");
             return true;
