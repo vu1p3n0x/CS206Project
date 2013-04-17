@@ -11,9 +11,12 @@ namespace CS206Project
     {
         public List<Card> deck;
         public List<Card> discardPile;
+
         Texture2D table;
         Rectangle background;
         public List<PlayerBase> players;
+
+        int currentPlayer;
 
         int currentPlayer;
         public void deck_push(Card theCard)
