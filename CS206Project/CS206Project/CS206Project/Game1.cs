@@ -45,6 +45,7 @@ namespace CS206Project
         {
             screens.Push(new MainScreen()); 
             screens.Peek().Initialize(this);
+
             base.Initialize();
         }
 
@@ -58,7 +59,8 @@ namespace CS206Project
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             texturetest = Content.Load<Texture2D>("Table_top copy");
-            // MainFont = Content.Load<SpriteFont>("mainfont");
+
+            screens.Peek().LoadContent(this);
 
             // TODO: use this.Content to load your game content here
         }
@@ -89,6 +91,7 @@ namespace CS206Project
                     screens.Pop();
                     screens.Push(newscreen);
                     screens.Peek().Initialize(this);
+                    screens.Peek().LoadContent(this);
                 }
                 // screen simply wants to be removed
                 else
@@ -111,7 +114,7 @@ namespace CS206Project
             else
             {
                 // exit the program if something wen wrong during the update
-                if (screens.Peek().Update(this, gameTime))
+                if (!screens.Peek().Update(this, gameTime))
                     this.Exit();
             }
 
@@ -139,7 +142,7 @@ namespace CS206Project
             else
             {
                 // exit the program if something wen wrong during the draw
-                if (screens.Peek().Draw(this, gameTime))
+                if (!screens.Peek().Draw(this, gameTime))
                     this.Exit();
             }
 

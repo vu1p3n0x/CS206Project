@@ -63,7 +63,7 @@ namespace CS206Project
 
             // draw game button
             game.spriteBatch.Draw(pixel, gameButton, Color.White);
-            game.spriteBatch.DrawString(font, "OPTIONS", new Vector2(gameButton.X + 5.0f, gameButton.Y + 10.0f), Color.Black);
+            game.spriteBatch.DrawString(font, "START", new Vector2(gameButton.X + 5.0f, gameButton.Y + 10.0f), Color.Black);
 
             return true;
         }
