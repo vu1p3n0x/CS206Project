@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace CS206Project
 {
-    class Settings
+    public class Settings
     {int numCards;
         int maxPlayers;
         string playerName;
