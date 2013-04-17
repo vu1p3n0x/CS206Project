@@ -8,16 +8,12 @@ namespace CS206Project
 {
     class GameScreen : Screen
     {
-        Texture2D card_images;
-        Texture2D table_top;
         public override bool Initialize(Game1 game)
         {
             throw new NotImplementedException();
         }
         public override bool LoadContent(Game1 game)
         {
-            card_images = game.Content.Load<Texture2D>("card_images");
-            table_top = game.Content.Load<Texture2D>("Table_top copy");
             return true;
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
