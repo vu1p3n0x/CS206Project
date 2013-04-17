@@ -21,3 +21,4 @@ D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.pdb
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\pixel.xnb
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\mainfont.xnb
+D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\card_images.xnb

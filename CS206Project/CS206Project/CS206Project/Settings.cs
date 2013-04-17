@@ -12,11 +12,13 @@ namespace CS206Project
         int maxPlayers;
         string playerName;
         Texture2D images;
+        Texture2D table;
         Rectangle[,] cardBacks = new Rectangle[5,13];
 
-        public override bool LoadContent(Game1 game)
+        public bool LoadContent(Game1 game)
         {
             images = game.Content.Load<Texture2D>("card_images");
+            table = game.Content.Load<Texture2D>("Table_top copy");
             return true;
         }
 
