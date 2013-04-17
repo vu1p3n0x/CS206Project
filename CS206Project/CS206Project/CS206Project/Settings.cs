@@ -8,8 +8,7 @@ using Microsoft.Xna.Framework;
 namespace CS206Project
 {
     public class Settings
-    {
-        int numCards;
+    {int numCards;
         int maxPlayers;
         string playerName;
         Texture2D images;
