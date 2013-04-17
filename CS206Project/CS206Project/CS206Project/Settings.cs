@@ -21,52 +21,52 @@ namespace CS206Project
             currentBack = 1;
         }
 
-        private int getNumCards()
+        public int getNumCards()
         {
             return numCards;
         }
         
-        private int getMaxPlayers()
+        public int getMaxPlayers()
         {
             return maxPlayers;
         }
 
-        private string getPlayerName()
+        public string getPlayerName()
         {
             return playerName;
         }
 
-        private int getCurrentCardBack()
+        public int getCurrentCardBack()
         {
             return currentCardBack;
         }
 
-        private int getCurrentBack()
+        public int getCurrentBack()
         {
             return currentBack;
         }
 
-        private void setNumCards(int n)
+        public void setNumCards(int n)
         {
             numCards = n;
         }
 
-        private void setMaxPlayers(int n)
+        public void setMaxPlayers(int n)
         {
             maxPlayers = n;
         }
 
-        private void setPlayerName(string name)
+        public void setPlayerName(string name)
         {
             playerName = name;
         }
 
-        private void setCurrentCardBack(int n)
+        public void setCurrentCardBack(int n)
         {
             currentCardBack = n;
         }
 
-        private void setCurrentBack(int n)
+        public void setCurrentBack(int n)
         {
             currentBack = n;
         }

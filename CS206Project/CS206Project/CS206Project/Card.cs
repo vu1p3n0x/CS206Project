@@ -20,16 +20,16 @@ namespace CS206Project
             visible = false;//defaults to false
         }
 
-        private int getNumber()
+        public int getNumber()
         {
             return number;
         }
-        private int getSuit()
+        public int getSuit()
         {
             return suit;
         }
 
-        private bool isVisible()
+        public bool isVisible()
         {
             return visible;
         }
