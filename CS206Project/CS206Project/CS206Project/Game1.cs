@@ -29,6 +29,7 @@ namespace CS206Project
 
         public Game1()
         {
+            IsMouseVisible = true;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
