@@ -13,8 +13,8 @@ namespace CS206Project
         int maxPlayers;
         string playerName;
         Texture2D images;
+        public Rectangle[,] cardBacks = new Rectangle[5,13];
         Texture2D table;
-        Rectangle[,] cardBacks = new Rectangle[5,13];
 
         public bool LoadContent(Game1 game)
         {

@@ -12,9 +12,11 @@ namespace CS206Project
     {
         Texture2D pixel;
         SpriteFont font;
+        Texture2D table;
 
         Rectangle optionsButton;
         Rectangle gameButton;
+        Rectangle background;
 
         bool options_pressed;
         bool game_pressed;
@@ -24,6 +26,7 @@ namespace CS206Project
             // set button sizes
             optionsButton = new Rectangle(5, 5, 100, 40);
             gameButton = new Rectangle(110, 5, 100, 40);
+            background = new Rectangle(0, 0, 500, 500);
 
             // initialize boolean variables
             options_pressed = false;
@@ -36,7 +39,7 @@ namespace CS206Project
             // load in graphics content
             pixel = game.Content.Load<Texture2D>("pixel");
             font = game.Content.Load<SpriteFont>("mainfont");
-
+            table = game.Content.Load<Texture2D>("Table_top copy");
             return true;
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
@@ -57,6 +60,9 @@ namespace CS206Project
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
+            // draw background
+            game.spriteBatch.Draw(table, background, Color.White);
+
             // draw options button
             game.spriteBatch.Draw(pixel, optionsButton, Color.White);
             game.spriteBatch.DrawString(font, "OPTIONS", new Vector2(optionsButton.X+5.0f, optionsButton.Y+10.0f), Color.Black);
@@ -64,6 +70,7 @@ namespace CS206Project
             // draw game button
             game.spriteBatch.Draw(pixel, gameButton, Color.White);
             game.spriteBatch.DrawString(font, "START", new Vector2(gameButton.X + 5.0f, gameButton.Y + 10.0f), Color.Black);
+
 
             return true;
         }

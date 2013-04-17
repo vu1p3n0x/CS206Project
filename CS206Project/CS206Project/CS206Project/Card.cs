@@ -9,20 +9,25 @@ namespace CS206Project
 {
     class Card
     {
+        const int width = 933 / 13;//roughtly the width of each card
+        const int height = 499 / 5;//roughly the height of each card
         int number;
         int suit; //Spade = 1; Club = 2; Heart = 3; Diamond = 4
         bool visible;
-        Texture2D card_images;
-        Texture2D front;
-        Texture2D back;
-        
+
+        public bool Initialize(Game1 game, int newNumber, int newSuit)
+        {
+            number = newNumber;
+            suit = newSuit;
+            visible = false;
+            return true;
+        }
 
         public Card(int newNumber, int newSuit)
         {
             number = newNumber;
             suit = newSuit;
             visible = false;//defaults to false
-            front = new Texture2D(card_images.GraphicsDevice, card_images.Width / 13, card_images.Height / 5);
         }
 
         public int getNumber()
