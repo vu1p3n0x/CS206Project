@@ -31,6 +31,9 @@ namespace CS206Project
         {
             IsMouseVisible = true;
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 500;
+            graphics.PreferredBackBufferWidth = 500;
+
             Content.RootDirectory = "Content";
 
             screens = new Stack<Screen>();

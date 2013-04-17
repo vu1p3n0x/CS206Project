@@ -37,6 +37,15 @@
       <Output>C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\mainfont.xnb</Output>
       <Time>2013-04-17T15:04:34.4639233-05:00</Time>
     </Item>
+    <Item>
+      <Source>card_images.png</Source>
+      <Name>card_images</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\card_images.xnb</Output>
+      <Time>2013-04-17T15:35:14.8712948-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

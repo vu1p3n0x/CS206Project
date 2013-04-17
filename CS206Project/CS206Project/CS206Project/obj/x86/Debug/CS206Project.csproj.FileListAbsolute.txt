@@ -15,6 +15,7 @@ D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\pixel.xnb
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\mainfont.xnb
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\card_images.xnb
+<<<<<<< HEAD
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\Table_top copy.xnb
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\pixel.xnb
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\card_images.xnb
@@ -24,3 +25,5 @@ C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Proje
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.exe
 C:\Users\Brad\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.pdb
+=======
+>>>>>>> 271016e9b66d9088c739c20c9a952a8d1fda3b53

@@ -15,6 +15,7 @@ namespace CS206Project
         Texture2D images;
         public Rectangle[,] cardBacks = new Rectangle[5,13];
         Texture2D table;
+
         public bool LoadContent(Game1 game)
         {
             images = game.Content.Load<Texture2D>("card_images");
