@@ -25,16 +25,16 @@ namespace CS206Project
             front = new Texture2D(card_images.GraphicsDevice, card_images.Width / 13, card_images.Height / 5);
         }
 
-        private int getNumber()
+        public int getNumber()
         {
             return number;
         }
-        private int getSuit()
+        public int getSuit()
         {
             return suit;
         }
 
-        private bool isVisible()
+        public bool isVisible()
         {
             return visible;
         }

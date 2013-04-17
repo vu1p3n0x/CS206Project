@@ -19,3 +19,5 @@ D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\Table_top copy.xnb
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.exe
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.pdb
+D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\pixel.xnb
+D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\mainfont.xnb
