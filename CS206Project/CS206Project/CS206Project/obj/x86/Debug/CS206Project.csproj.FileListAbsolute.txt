@@ -21,4 +21,9 @@ D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\CS206Project.pdb
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\pixel.xnb
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\mainfont.xnb
+<<<<<<< HEAD
 D:\My Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\bin\x86\Debug\Content\card_images.xnb
+=======
+C:\Users\Nicholas\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\CS206Project.csprojResolveAssemblyReference.cache
+C:\Users\Nicholas\Documents\GitHub\CS206Project\CS206Project\CS206Project\CS206Project\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+>>>>>>> more player stuff

@@ -19,9 +19,9 @@ namespace CS206Project
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public Settings settings;
-        public const int JACK = 11;
-        public const int QUEEN = 12;
-        public const int KING = 13;
+        public static int JACK = 11;
+        public static int QUEEN = 12;
+        public static int KING = 13;
 
         Texture2D texturetest;
         //SpriteFont MainFont;

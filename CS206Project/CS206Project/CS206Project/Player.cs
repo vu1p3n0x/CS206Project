@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
-
+using Microsoft.Xna.Framework;
 namespace CS206Project
 {
     class Player
@@ -15,17 +15,6 @@ namespace CS206Project
         private Card hand;                              // card the player is currently holding during their turn
         
         //default constructor
-        public Player()
-        {
-            name = Settings.getPlayerName();
-            maxCards = Settings.getNumCards();
-            field.Clear();                              // makes sure there is nothing in field
-            field.Add(Card.Blank);                      // adds a blank card to the 0th index so we can start indexing at 1
-            //for (int i = 1; i <= maxCards; i++)
-              //  field.Add(deck.pop());
-            validPlays = true;
-            hand = Card.Blank;                          //set hand to blank card
-        }
 
         public void setName(string newName) { name = newName; }
 
@@ -51,12 +40,12 @@ namespace CS206Project
             bool hasDrawn = false;
             if (clickLocation == DECK)
             {
-                hand = deck.pop();
+                hand = GameScreen.deck_pop();
                 hasDrawn = true;
             }
             else if (clickLocation == DISCARD_PILE)
             {
-                hand = discardPile.pop();
+                hand = GameScreen.discardPile_pop();
                 hasDrawn = true;
             }
             return hasDrawn;
@@ -70,18 +59,18 @@ namespace CS206Project
 	  {
 		if (clickLocation == FIELD[i])
 		{
-		  if ((hand.getNumber() == i) || (hand.number == JACK))
+		  if ((hand.getNumber() == i) || (hand.getNumber() == Game1.JACK))
 		  {
 		    if (!field[i].isVisible())
 		    {
-			  card temp = field[i];
+			  Card temp = field[i];
 			  field[i] = hand;
 			  field[i].show();
 			  hand = temp;
 			  hasPlayed = true;
 			  i = maxCards + 1;
 		    }
-		    else if (field[i].isVisible() && (field[i].number == JACK))
+		    else if (field[i].isVisible() && (field[i].getNumber() == Game1.JACK))
 		    {
 			  Card temp = field[i];
 			  field[i] = hand;
@@ -107,7 +96,7 @@ namespace CS206Project
                 clickLocation = Mouse.GetState();
                 if (clickLocation == DISCARD_PILE)
                 {
-                    discardPile.push(hand);
+                    GameScreen.discardPile_push(hand);
                     hand = Card.Blank;
                     hasDiscarded = true;
                 }
@@ -131,7 +120,7 @@ namespace CS206Project
         {
             int j = i;
             MouseState clickLocation;
-            while (field[j].visible)
+            while (field[j].isVisible())
             {
                 clickLocation = Mouse.GetState();
                 for (int k = 1; k <= maxCards; k++)
@@ -145,20 +134,52 @@ namespace CS206Project
             }
             Card temp = field[j];
             field[j] = hand;
-            discardPile.push(temp);
+            GameScreen.discardPile_push(temp);
             hand = Card.Blank;
             return true;
         }
+
         public void playCheck()
         {
-            if ((hand.number > maxCards) && (hand.number != JACK))
+            if ((hand.getNumber() > maxCards) && (hand.getNumber() != Game1.JACK))
                 validPlays = false;
-            else if (hand.number != JACK)
+            else if (hand.getNumber() != Game1.JACK)
             {
-                if (field[hand.number].visible && (field[hand.number].number != JACK))
+                if (field[hand.getNumber()].isVisible() && (field[hand.getNumber()].getNumber() != Game1.JACK))
                     validPlays = false;
             }
             return;
+        }
+
+        public override bool Initialize(Game1 game)
+        {
+            name = game.settings.getPlayerName();
+            maxCards = game.settings.getNumCards();
+            field.Clear();                              // makes sure there is nothing in field
+            field.Add(Card.Blank);                      // adds a blank card to the 0th index so we can start indexing at 1
+            //for (int i = 1; i <= maxCards; i++)
+            //  field.Add(deck.pop());
+            validPlays = true;
+            hand = Card.Blank;                          //set hand to blank card
+            return true;
+        }
+
+        public override bool LoadContent(Game1 game)
+        {
+
+            return true;
+        }
+
+        public override bool Update(Game1 game, GameTime time)
+        {
+            
+            return true;
+        }
+
+        public override bool Draw(Game1 game, GameTime time)
+        {
+            
+            return true;
         }
     }
 

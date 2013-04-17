@@ -8,18 +8,50 @@ namespace CS206Project
 {
     class GameScreen : Screen
     {
+        public List<Card> deck;
+        public List<Card> discardPile;
+
+        public void deck_push(Card theCard)
+        {
+            deck.Add(theCard);
+            return;
+        }
+
+        public void discardPile_push(Card theCard)
+        {
+            discardPile.Add(theCard);
+            return;
+        }
+
+        public Card deck_pop()
+        {
+            return deck[deck.Count - 1];
+        }
+
+        public Card discardPile_pop()
+        {
+            return discardPile[discardPile.Count - 1];
+        }
+
         public override bool Initialize(Game1 game)
         {
+            for (int i = 1; i <= 4; i++)
+                for (int j = 1; j <= Game1.KING; j++)
+                    deck.Add(new Card(j, i));
+            deck = shuffle(deck);
             throw new NotImplementedException();
         }
+
         public override bool LoadContent(Game1 game)
         {
             return true;
         }
+
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
             throw new NotImplementedException();
         }
+
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
             throw new NotImplementedException();
@@ -29,6 +61,7 @@ namespace CS206Project
         {
             throw new NotImplementedException();
         }
+
         public override Screen GetNextScreen()
         {
             throw new NotImplementedException();
