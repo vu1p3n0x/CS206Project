@@ -14,8 +14,6 @@ namespace CS206Project
         string playerName;
         Texture2D images;
         Rectangle[,] cardBacks = new Rectangle[5,13];
-        int currentCardBack;
-        int currentBack;
 
         public override bool LoadContent(Game1 game)
         {
@@ -23,14 +21,12 @@ namespace CS206Project
             return true;
         }
 
-        public Settings(){
+        public Settings()
+        {
             numCards = 8;
             maxPlayers = 4;
             playerName = "Bob";
             loadCardBacks();
-            loadTableBacks();
-            currentCardBack = 1;
-            currentBack = 1;
         }
 
         public int getNumCards()
@@ -48,16 +44,6 @@ namespace CS206Project
             return playerName;
         }
 
-        public int getCurrentCardBack()
-        {
-            return currentCardBack;
-        }
-
-        public int getCurrentBack()
-        {
-            return currentBack;
-        }
-
         public void setNumCards(int n)
         {
             numCards = n;
@@ -73,26 +59,25 @@ namespace CS206Project
             playerName = name;
         }
 
-        public void setCurrentCardBack(int n)
-        {
-            currentCardBack = n;
-        }
-
-        public void setCurrentBack(int n)
-        {
-            currentBack = n;
-        }
-
         private void loadCardBacks()
         {
             Rectangle temp;
-            int width = images.Width / 13;
-            int height = images.Height / 5;
+            const int NUM_COLUMNS = 13;
+            const int NUM_ROWS = 5;
+            int width = images.Width / NUM_COLUMNS;
+            int height = images.Height / NUM_ROWS;
             int currentFrame = 0;
+            int row;
+            int column;
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 13; j++)
                 {
+                    row = (int)((float)currentFrame / (float) NUM_COLUMNS);
+                    column = currentFrame % NUM_COLUMNS;
+                    temp = new Rectangle(width * column, height * row, width, height);
+                    cardBacks[i, j] = temp;
+                    currentFrame++;
                 }
             }
         }
