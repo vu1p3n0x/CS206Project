@@ -9,8 +9,8 @@ namespace CS206Project
 {
     class Card
     {
-        const int width = 933 / 13;//roughtly the width of each card
-        const int height = 499 / 5;//roughly the height of each card
+        const int width = 933 / 13;//71.76 roughtly the width of each card
+        const int height = 499 / 5;//100 roughly the height of each card
         int number;
         int suit; //Spade = 1; Club = 2; Heart = 3; Diamond = 4
         bool visible;

@@ -17,7 +17,7 @@ namespace CS206Project
         //default constructor
 
         public Player() { }
-        public void setName(string newName) { name = newName; }
+        /*public void setName(string newName) { name = newName; }
 
         public void setMaxCards(int numCards) { maxCards = numCards; }
 
@@ -150,7 +150,7 @@ namespace CS206Project
                     validPlays = false;
             }
             return;
-        }
+        }*/
 
         public override bool Initialize(Game1 game)
         {

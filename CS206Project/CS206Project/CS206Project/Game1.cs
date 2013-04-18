@@ -109,7 +109,11 @@ namespace CS206Project
                 // screen wishes to add a screen on top of it
                 if (screens.Peek().HasNextScreen())
                 {
-                    screens.Push(screens.Peek().GetNextScreen());
+                    Screen newscreen = screens.Peek().GetNextScreen();
+                    screens.Pop();
+                    screens.Push(newscreen);
+                    screens.Peek().Initialize(this);
+                    screens.Peek().LoadContent(this);
                 }
             }
 
