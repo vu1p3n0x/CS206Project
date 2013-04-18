@@ -54,13 +54,12 @@ namespace CS206Project
             discard_location = new Rectangle(260, 200, 70, 100);
             background = new Rectangle(0, 0, 500, 500);
             currentPlayer = 0;
-            //players.Add(new Player());
+            players.Add(new Player());
 
             for (int i = 1; i <= 4; i++)
                 for (int j = 1; j <= Game1.KING; j++)
-                    //deck.Add(new Card(j, i));
-                    //deck = shuffle(deck);
-                    ; ;
+                    deck.Add(new Card(j, i));
+            deck = shuffle(deck);
             return true;
         }
 
@@ -73,7 +72,7 @@ namespace CS206Project
 
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
-            //players[currentPlayer].Update(game, time, this);
+            players[currentPlayer].Update(game, time, this);
             return true;
         }
 
