@@ -14,11 +14,12 @@ namespace CS206Project
 
         Texture2D table;
         Rectangle background;
-        Rectangle[] fields;
-        Rectangle deck_location;
-        Rectangle discard_location;
+        public Rectangle[,] fields;
+        public Rectangle deck_location;
+        public Rectangle discard_location;
         Texture2D pixel;
         public List<PlayerBase> players;
+        Vector2 origin;
 
         int currentPlayer;
         public void deck_push(Card theCard)
@@ -45,14 +46,48 @@ namespace CS206Project
 
         public override bool Initialize(Game1 game)
         {
-            fields = new Rectangle[4];//current allowed max players
-            fields[0] = new Rectangle(150, 350, 200, 100);
-            fields[1] = new Rectangle(25, 150, 100, 200);
-            fields[2] = new Rectangle(150, 50, 200, 100);
-            fields[3] = new Rectangle(375, 150, 100, 200);
-            deck_location = new Rectangle(170, 200, 70, 100);
-            discard_location = new Rectangle(260, 200, 70, 100);
-            background = new Rectangle(0, 0, 500, 500);
+            fields = new Rectangle[4,8];//current allowed max players
+            fields[0, 0] = new Rectangle(250, 375, 70, 100);
+            fields[0, 1] = new Rectangle(325, 375, 70, 100);
+            fields[0, 2] = new Rectangle(400, 375, 70, 100);
+            fields[0, 3] = new Rectangle(475, 375, 70, 100);
+            fields[0, 4] = new Rectangle(250, 480, 70, 100);
+            fields[0, 5] = new Rectangle(325, 480, 70, 100);
+            fields[0, 6] = new Rectangle(400, 480, 70, 100);
+            fields[0, 7] = new Rectangle(475, 480, 70, 100);
+
+            fields[1, 0] = new Rectangle(225, 150, 70, 100);
+            fields[1, 1] = new Rectangle(225, 225, 70, 100);
+            fields[1, 2] = new Rectangle(225, 300, 70, 100);
+            fields[1, 3] = new Rectangle(225, 375, 70, 100);
+            fields[1, 4] = new Rectangle(120, 150, 70, 100);
+            fields[1, 5] = new Rectangle(120, 225, 70, 100);
+            fields[1, 6] = new Rectangle(120, 300, 70, 100);
+            fields[1, 7] = new Rectangle(120, 375, 70, 100);
+
+            fields[2, 0] = new Rectangle(250, 20, 70, 100);
+            fields[2, 1] = new Rectangle(325, 20, 70, 100);
+            fields[2, 2] = new Rectangle(400, 20, 70, 100);
+            fields[2, 3] = new Rectangle(475, 20, 70, 100);
+            fields[2, 4] = new Rectangle(250, 125, 70, 100);
+            fields[2, 5] = new Rectangle(325, 125, 70, 100);
+            fields[2, 6] = new Rectangle(400, 125, 70, 100);
+            fields[2, 7] = new Rectangle(475, 125, 70, 100);
+
+            fields[3, 0] = new Rectangle(655, 150, 70, 100);
+            fields[3, 1] = new Rectangle(655, 225, 70, 100);
+            fields[3, 2] = new Rectangle(655, 300, 70, 100);
+            fields[3, 3] = new Rectangle(655, 375, 70, 100);
+            fields[3, 4] = new Rectangle(760, 150, 70, 100);
+            fields[3, 5] = new Rectangle(760, 225, 70, 100);
+            fields[3, 6] = new Rectangle(760, 300, 70, 100);
+            fields[3, 7] = new Rectangle(760, 375, 70, 100);
+
+            deck_location = new Rectangle(325, 250, 70, 100);
+            discard_location = new Rectangle(400, 250, 70, 100);
+            background = new Rectangle(0, 0, 780, 600);
+            origin.X = 0;
+            origin.Y = 0;
             currentPlayer = 0;
             players.Add(new Player());
 
@@ -78,11 +113,51 @@ namespace CS206Project
 
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
+            //Draws background
             game.spriteBatch.Draw(table,background,Color.White);
-            game.spriteBatch.Draw(pixel, fields[0], Color.White);
-            game.spriteBatch.Draw(pixel, fields[1], Color.White);
-            game.spriteBatch.Draw(pixel, fields[2], Color.White);
-            game.spriteBatch.Draw(pixel, fields[3], Color.White);
+            //Draws player 0's (user) field
+            game.spriteBatch.Draw(pixel, fields[0, 0], Color.White);
+            game.spriteBatch.Draw(pixel, fields[0, 1], Color.White);
+            game.spriteBatch.Draw(pixel, fields[0, 2], Color.White);
+            game.spriteBatch.Draw(pixel, fields[0, 3], Color.White);
+            game.spriteBatch.Draw(pixel, fields[0, 4], Color.White);
+            game.spriteBatch.Draw(pixel, fields[0, 5], Color.White);
+            game.spriteBatch.Draw(pixel, fields[0, 6], Color.White);
+            game.spriteBatch.Draw(pixel, fields[0, 7], Color.White);
+
+            //Draws player 1's field
+            game.spriteBatch.Draw(pixel, fields[1, 0], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 1], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 2], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 3], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 4], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 5], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 6], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 7], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+
+
+            //Draws player 2's field
+            game.spriteBatch.Draw(pixel, fields[2, 0], Color.White);
+            game.spriteBatch.Draw(pixel, fields[2, 1], Color.White);
+            game.spriteBatch.Draw(pixel, fields[2, 2], Color.White);
+            game.spriteBatch.Draw(pixel, fields[2, 3], Color.White);
+            game.spriteBatch.Draw(pixel, fields[2, 4], Color.White);
+            game.spriteBatch.Draw(pixel, fields[2, 5], Color.White);
+            game.spriteBatch.Draw(pixel, fields[2, 6], Color.White);
+            game.spriteBatch.Draw(pixel, fields[2, 7], Color.White);
+
+
+            //Draws player 3's field
+            game.spriteBatch.Draw(pixel, fields[3, 0], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 1], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 2], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 3], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 4], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 5], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 6], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 7], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+
+
             game.spriteBatch.Draw(pixel, deck_location, Color.White);
             game.spriteBatch.Draw(pixel, discard_location, Color.White);
             return true;
@@ -90,6 +165,8 @@ namespace CS206Project
 
         public override bool HasNextScreen()
         {
+
+            System.Threading.Thread.Sleep(5000);
             throw new NotImplementedException();
         }
 

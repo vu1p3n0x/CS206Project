@@ -26,7 +26,7 @@ namespace CS206Project
             // set button sizes
             optionsButton = new Rectangle(5, 5, 100, 40);
             gameButton = new Rectangle(110, 5, 100, 40);
-            background = new Rectangle(0, 0, 500, 500);
+            background = new Rectangle(0, 0, 780, 600);
 
             // initialize boolean variables
             options_pressed = false;

@@ -32,8 +32,8 @@ namespace CS206Project
             IsMouseVisible = true;
             graphics = new GraphicsDeviceManager(this);
 
-            graphics.PreferredBackBufferHeight = 500;
-            graphics.PreferredBackBufferWidth = 500;
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 780;
 
             Content.RootDirectory = "Content";
 
