@@ -39,6 +39,13 @@ namespace CS206Project
             throw new NotImplementedException();
         }
 
-
+        public override bool HasNextScreen()
+        {
+            return false;
+        }
+        public override Screen GetNextScreen()
+        {
+            return new ScreenEmpty();
+        }
     }
 }
