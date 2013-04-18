@@ -13,49 +13,56 @@ namespace CS206Project
         private List<Card> field;                       // vector to hold all the cards the player has on the table
         private bool validPlays;                        // true if the player can play the card in their hand, false if they must discard or bury
         private Card hand;                              // card the player is currently holding during their turn
-        
+        private bool hasDrawn;
+
         //default constructor
 
         public Player() { }
+
         public void setName(string newName) { name = newName; }
 
         public void setMaxCards(int numCards) { maxCards = numCards; }
 
         public void addCard(Card theCard) { field.Add(theCard); }           // adds a card to the field, for use in deal function
 
-        public void turn()
+        public void turn(GameScreen gamescreen)
         {
             validPlays = true;
-            while (!drawCard(Mouse.GetState())) { }
-            playCheck();
-            while (validPlays)
+            if (!hasDrawn)
             {
-                while (!playCard(Mouse.GetState())) { }
-                playCheck();
+                drawCard(Mouse.GetState(), gamescreen);
             }
-            discardCard();
+            else if (playCheck())
+            {
+                playCard(Mouse.GetState());
+            }
+            else if (!playCheck())
+            {
+                if (discardCard(Mouse.GetState(), gamescreen))
+                {
+                    hasDrawn = false;
+                    playerTurn = 1;
+                }
+            }
         }
 
-        public bool drawCard(MouseState clickLocation)
+        public void drawCard(MouseState clickLocation, GameScreen gamescreen)
         {
-            bool hasDrawn = false;
             if (clickLocation == DECK)
             {
-                hand = GameScreen.deck_pop();
+                hand = gamescreen.deck_pop();
                 hasDrawn = true;
             }
             else if (clickLocation == DISCARD_PILE)
             {
-                hand = GameScreen.discardPile_pop();
+                hand = gamescreen.discardPile_pop();
                 hasDrawn = true;
             }
-            return hasDrawn;
+            return;
         }
 
-        public bool playCard(MouseState clickLocation)
+        public void playCard(MouseState clickLocation)
     {
-	  bool hasPlayed = false;
-
 	  for (int i = 1; i <= maxCards; i++)
 	  {
 		if (clickLocation == FIELD[i])
@@ -68,7 +75,6 @@ namespace CS206Project
 			  field[i] = hand;
 			  field[i].show();
 			  hand = temp;
-			  hasPlayed = true;
 			  i = maxCards + 1;
 		    }
 		    else if (field[i].isVisible() && (field[i].getNumber() == Game1.JACK))
@@ -77,70 +83,54 @@ namespace CS206Project
 			  field[i] = hand;
 			  field[i].show();
 			  hand = temp;
-			  hasPlayed = true;
 			  i = maxCards + 1;
 		    }
 		  }
 		}
 	  }
 
-	  return hasPlayed;
+	  return;
     }
 
-        public void discardCard()
+        public bool discardCard(MouseState clickLocation, GameScreen gamescreen)
         {
-            MouseState clickLocation = new MouseState();
             bool hasDiscarded = false;
 
-            while (!hasDiscarded)
+            if (clickLocation == DISCARD_PILE)
             {
-                clickLocation = Mouse.GetState();
-                if (clickLocation == DISCARD_PILE)
+                gamescreen.discardPile_push(hand);
+                hand = Card.Blank;
+                hasDiscarded = true;
+            }
+            else
+            {
+                for (int i = 1; i <= maxCards; i++)
                 {
-                    GameScreen.discardPile_push(hand);
-                    hand = Card.Blank;
-                    hasDiscarded = true;
-                }
-                else
-                {
-                    for (int i = 1; i <= maxCards; i++)
+                    if (clickLocation == FIELD[i])
                     {
-                        if (clickLocation == FIELD[i])
-                        {
-                            hasDiscarded = buryCard(i);
-                            i = maxCards + 1;
-                        }
+                        hasDiscarded = buryCard(i, gamescreen);
+                        i = maxCards + 1;
                     }
                 }
             }
-
-            return;
+            return hasDiscarded;
         }
 
-        public bool buryCard(int i)
+        public bool buryCard(int i, GameScreen gamescreen)
         {
-            int j = i;
-            MouseState clickLocation;
-            while (field[j].isVisible())
+            if(!field[i].isVisible())
             {
-                clickLocation = Mouse.GetState();
-                for (int k = 1; k <= maxCards; k++)
-                {
-                    if (clickLocation == FIELD[k])
-                    {
-                        j = k;
-                        k = maxCards + 1;
-                    }
-                }
+                Card temp = field[i];
+                field[i] = hand;
+                gamescreen.discardPile_push(temp);
+                hand = Card.Blank;
+                return true;
             }
-            Card temp = field[j];
-            field[j] = hand;
-            GameScreen.discardPile_push(temp);
-            hand = Card.Blank;
-            return true;
+            else
+                return false;
         }
 
-        public void playCheck()
+        public bool playCheck()
         {
             if ((hand.getNumber() > maxCards) && (hand.getNumber() != Game1.JACK))
                 validPlays = false;
@@ -149,19 +139,20 @@ namespace CS206Project
                 if (field[hand.getNumber()].isVisible() && (field[hand.getNumber()].getNumber() != Game1.JACK))
                     validPlays = false;
             }
-            return;
+            return validPlays;
         }
 
-        public override bool Initialize(Game1 game)
+        public override bool Initialize(Game1 game, GameScreen gamescreen)
         {
             name = game.settings.getPlayerName();
             maxCards = game.settings.getNumCards();
             field.Clear();                              // makes sure there is nothing in field
             field.Add(Card.Blank);                      // adds a blank card to the 0th index so we can start indexing at 1
             for (int i = 1; i <= maxCards; i++)
-              field.Add(deck.pop());
+              field.Add(gamescreen.deck_pop());
             validPlays = true;
             hand = Card.Blank;                          //set hand to blank card
+            hasDrawn = false;
             return true;
         }
 
@@ -173,7 +164,8 @@ namespace CS206Project
 
         public override bool Update(Game1 game, GameTime time, GameScreen gamescreen)
         {
-            
+            if(playerTurn == 0)
+                turn(gamescreen);
             return true;
         }
 
