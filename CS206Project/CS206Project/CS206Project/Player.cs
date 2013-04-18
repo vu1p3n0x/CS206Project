@@ -142,14 +142,14 @@ namespace CS206Project
             return validPlays;
         }
 
-        public override bool Initialize(Game1 game)
+        public override bool Initialize(Game1 game, GameScreen gamescreen)
         {
             name = game.settings.getPlayerName();
             maxCards = game.settings.getNumCards();
             field.Clear();                              // makes sure there is nothing in field
             field.Add(Card.Blank);                      // adds a blank card to the 0th index so we can start indexing at 1
             for (int i = 1; i <= maxCards; i++)
-              field.Add(deck.pop());
+              field.Add(gamescreen.deck_pop());
             validPlays = true;
             hand = Card.Blank;                          //set hand to blank card
             hasDrawn = false;
