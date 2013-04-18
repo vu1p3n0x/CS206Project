@@ -110,7 +110,6 @@ namespace CS206Project
                 if (screens.Peek().HasNextScreen())
                 {
                     Screen newscreen = screens.Peek().GetNextScreen();
-                    screens.Pop();
                     screens.Push(newscreen);
                     screens.Peek().Initialize(this);
                     screens.Peek().LoadContent(this);
