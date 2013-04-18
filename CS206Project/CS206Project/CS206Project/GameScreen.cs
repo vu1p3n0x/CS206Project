@@ -17,8 +17,6 @@ namespace CS206Project
         public List<PlayerBase> players;
 
         int currentPlayer;
-
-        int currentPlayer;
         public void deck_push(Card theCard)
         {
             deck.Add(theCard);
