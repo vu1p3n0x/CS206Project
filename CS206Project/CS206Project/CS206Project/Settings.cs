@@ -20,6 +20,7 @@ namespace CS206Project
         {
             images = game.Content.Load<Texture2D>("card_images");
             table = game.Content.Load<Texture2D>("Table_top copy");
+            loadCardBacks();
             return true;
         }
 
@@ -27,8 +28,7 @@ namespace CS206Project
         {
             numCards = 8;
             maxPlayers = 4;
-            playerName = "Bob";
-            loadCardBacks();
+            playerName = "Ladeda";
         }
 
         public int getNumCards()

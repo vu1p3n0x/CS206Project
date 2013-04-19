@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 namespace CS206Project
 {
-    class Player : PlayerBase
+    class Player
     {
         private string name;                            // name of the player
         private int maxCards;                           // number of cards face-up needed to win this round
@@ -17,7 +17,12 @@ namespace CS206Project
 
         //default constructor
 
-        public Player() { }
+        public Player(Game1 game, GameScreen gamescreen, string newName)
+        {
+            name = string.Copy(newName);
+            maxCards = game.settings.getNumCards();
+            hand = Card.Blank;
+        }
 
         public void setName(string newName) { name = newName; }
 
@@ -254,40 +259,35 @@ namespace CS206Project
             return validPlays;
         }
 
-        public override bool Initialize(Game1 game, GameScreen gamescreen)
-        {
-            name = game.settings.getPlayerName();
-            maxCards = game.settings.getNumCards();
-            field.Clear();                              // makes sure there is nothing in field
-            field.Add(Card.Blank);                      // adds a blank card to the 0th index so we can start indexing at 1
-            for (int i = 1; i <= maxCards; i++)
-              field.Add(gamescreen.deck_pop());
-            validPlays = true;
-            hand = Card.Blank;                          //set hand to blank card
-            hasDrawn = false;
-            return true;
-        }
-
-        public override bool LoadContent(Game1 game)
+        public bool Initialize(Game1 game, GameScreen gamescreen)
         {
 
             return true;
         }
 
-        public override bool Update(Game1 game, GameTime time, GameScreen gamescreen)
+        public bool LoadContent(Game1 game)
+        {
+
+            return true;
+        }
+
+        public bool Update(Game1 game, GameTime time, GameScreen gamescreen)
         {
             if (gamescreen.currentPlayer == 0)
                 turn(gamescreen);
             else
                 computerTurn(gamescreen);
+
             return true;
         }
 
-        public override bool Draw(Game1 game, GameTime time)
+        public bool Draw(Game1 game, GameTime time)
         {
             
             return true;
         }
+
+        public static readonly Card Blank = new Card(0, 0);
     }
 
 }

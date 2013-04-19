@@ -9,8 +9,8 @@ namespace CS206Project
 {
     class GameScreen : Screen
     {
-        public List<Card> deck;
-        public List<Card> discardPile;
+        public List<Card> deck = new List<Card>();
+        public List<Card> discardPile = new List<Card>();
 
         Texture2D table;
         Rectangle background;
@@ -18,7 +18,7 @@ namespace CS206Project
         public Rectangle deck_location;
         public Rectangle discard_location;
         Texture2D pixel;
-        public List<Player> players;
+        public List<Player> players = new List<Player>();
         Vector2 origin;
 
         public int currentPlayer;
@@ -89,7 +89,11 @@ namespace CS206Project
             origin.X = 0;
             origin.Y = 0;
             currentPlayer = 0;
-            players.Add(new Player());
+
+            players.Add(new Player(game, this, game.settings.getPlayerName()));
+            players.Add(new Player(game, this, "Bob"));
+            players.Add(new Player(game, this, "Tom"));
+            players.Add(new Player(game, this, "Jerry"));
 
             for (int i = 1; i <= 4; i++)
                 for (int j = 1; j <= Game1.KING; j++)

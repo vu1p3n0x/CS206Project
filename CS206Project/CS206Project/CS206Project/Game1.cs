@@ -50,7 +50,7 @@ namespace CS206Project
         {
             screens.Push(new MainScreen()); 
             screens.Peek().Initialize(this);
-
+            settings = new Settings();
             base.Initialize();
         }
 
@@ -64,7 +64,7 @@ namespace CS206Project
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             texturetest = Content.Load<Texture2D>("Table_top copy");
-
+            settings.LoadContent(this);
             screens.Peek().LoadContent(this);
 
             // TODO: use this.Content to load your game content here

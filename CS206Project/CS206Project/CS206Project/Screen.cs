@@ -12,7 +12,7 @@ namespace CS206Project
     {
         // private members
         private bool m_remove;
-
+        Settings settings;
         // constructors and destructors
         public Screen()
         {
