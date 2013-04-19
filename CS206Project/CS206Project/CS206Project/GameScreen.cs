@@ -21,7 +21,7 @@ namespace CS206Project
         public List<PlayerBase> players;
         Vector2 origin;
 
-        int currentPlayer;
+        public int currentPlayer;
         public void deck_push(Card theCard)
         {
             deck.Add(theCard);

@@ -34,7 +34,7 @@ namespace CS206Project
             }
             else if (playCheck())
             {
-                playCard(Mouse.GetState());
+                playCard(Mouse.GetState(), gamescreen);
             }
             else if (!playCheck())
             {
@@ -64,33 +64,36 @@ namespace CS206Project
             return;
         }
 
-        public void playCard(MouseState clickLocation)
+        public void playCard(MouseState clickLocation, GameScreen gamescreen)
     {
-	  for (int i = 1; i <= maxCards; i++)
-	  {
-		if (clickLocation == FIELD[i])
-		{
-		  if ((hand.getNumber() == i) || (hand.getNumber() == Game1.JACK))
-		  {
-		    if (!field[i].isVisible())
-		    {
-			  Card temp = field[i];
-			  field[i] = hand;
-			  field[i].show();
-			  hand = temp;
-			  i = maxCards + 1;
-		    }
-		    else if (field[i].isVisible() && (field[i].getNumber() == Game1.JACK))
-		    {
-			  Card temp = field[i];
-			  field[i] = hand;
-			  field[i].show();
-			  hand = temp;
-			  i = maxCards + 1;
-		    }
-		  }
-		}
-	  }
+        if (clickLocation.LeftButton == ButtonState.Pressed)
+        {
+            for (int i = 0; i < maxCards; i++)
+            {
+                if (gamescreen.fields[0,i].Contains(clickLocation.X, clickLocation.Y))
+                {
+                    if ((hand.getNumber() == (i+1)) || (hand.getNumber() == Game1.JACK))
+                    {
+                        if (!field[i].isVisible())
+                        {
+                            Card temp = field[i];
+                            field[i] = hand;
+                            field[i].show();
+                            hand = temp;
+                            i = maxCards + 1;
+                        }
+                        else if (field[i].isVisible() && (field[i].getNumber() == Game1.JACK))
+                        {
+                            Card temp = field[i];
+                            field[i] = hand;
+                            field[i].show();
+                            hand = temp;
+                            i = maxCards + 1;
+                        }
+                    }
+                }
+            }
+        }
 
 	  return;
     }
@@ -110,9 +113,9 @@ namespace CS206Project
                 }
                 else
                 {
-                    for (int i = 1; i <= maxCards; i++)
+                    for (int i = 0; i < maxCards; i++)
                     {
-                        if (clickLocation == FIELD[i])
+                        if (gamescreen.fields[0, i].Contains(clickLocation.X, clickLocation.Y))
                         {
                             hasDiscarded = buryCard(i, gamescreen);
                             i = maxCards + 1;
