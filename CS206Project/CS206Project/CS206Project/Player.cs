@@ -41,22 +41,25 @@ namespace CS206Project
                 if (discardCard(Mouse.GetState(), gamescreen))
                 {
                     hasDrawn = false;
-                    playerTurn = 1;
+                    gamescreen.currentPlayer = 1;
                 }
             }
         }
 
         public void drawCard(MouseState clickLocation, GameScreen gamescreen)
         {
-            if (clickLocation == DECK)
+            if (clickLocation.LeftButton == ButtonState.Pressed)
             {
-                hand = gamescreen.deck_pop();
-                hasDrawn = true;
-            }
-            else if (clickLocation == DISCARD_PILE)
-            {
-                hand = gamescreen.discardPile_pop();
-                hasDrawn = true;
+                if (gamescreen.deck_location.Contains(clickLocation.X, clickLocation.Y))
+                {
+                    hand = gamescreen.deck_pop();
+                    hasDrawn = true;
+                }
+                else if (gamescreen.discard_location.Contains(clickLocation.X, clickLocation.Y))
+                {
+                    hand = gamescreen.discardPile_pop();
+                    hasDrawn = true;
+                }
             }
             return;
         }
@@ -96,20 +99,24 @@ namespace CS206Project
         {
             bool hasDiscarded = false;
 
-            if (clickLocation == DISCARD_PILE)
+            if (clickLocation.LeftButton == ButtonState.Pressed)
             {
-                gamescreen.discardPile_push(hand);
-                hand = Card.Blank;
-                hasDiscarded = true;
-            }
-            else
-            {
-                for (int i = 1; i <= maxCards; i++)
+
+                if (gamescreen.discard_location.Contains(clickLocation.X, clickLocation.Y))
                 {
-                    if (clickLocation == FIELD[i])
+                    gamescreen.discardPile_push(hand);
+                    hand = Card.Blank;
+                    hasDiscarded = true;
+                }
+                else
+                {
+                    for (int i = 1; i <= maxCards; i++)
                     {
-                        hasDiscarded = buryCard(i, gamescreen);
-                        i = maxCards + 1;
+                        if (clickLocation == FIELD[i])
+                        {
+                            hasDiscarded = buryCard(i, gamescreen);
+                            i = maxCards + 1;
+                        }
                     }
                 }
             }
@@ -164,7 +171,7 @@ namespace CS206Project
 
         public override bool Update(Game1 game, GameTime time, GameScreen gamescreen)
         {
-            if(playerTurn == 0)
+            if(gamescreen.currentPlayer == 0)
                 turn(gamescreen);
             return true;
         }
