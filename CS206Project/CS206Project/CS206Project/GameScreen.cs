@@ -18,7 +18,7 @@ namespace CS206Project
         public Rectangle deck_location;
         public Rectangle discard_location;
         Texture2D pixel;
-        public List<PlayerBase> players;
+        public List<Player> players;
         Vector2 origin;
 
         public int currentPlayer;

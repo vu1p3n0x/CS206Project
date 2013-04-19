@@ -25,6 +25,28 @@ namespace CS206Project
 
         public void addCard(Card theCard) { field.Add(theCard); }           // adds a card to the field, for use in deal function
 
+        public void computerTurn(GameScreen gamescreen)
+        {
+            validPlays = true;
+            if (!hasDrawn)
+            {
+                drawCard(gamescreen);
+            }
+            else if (playCheck())
+            {
+                playCard(gamescreen);
+            }
+            else if (!playCheck())
+            {
+                if (discardCard(gamescreen))
+                {
+                    hasDrawn = false;
+                    gamescreen.currentPlayer++;
+                    if (gamescreen.currentPlayer == 4)
+                        gamescreen.currentPlayer = 0;
+                }
+            }
+        }
         public void turn(GameScreen gamescreen)
         {
             validPlays = true;
@@ -46,6 +68,33 @@ namespace CS206Project
             }
         }
 
+        public void drawCard(GameScreen gamescreen)
+        {
+            Card temp;
+            temp = gamescreen.discardPile[gamescreen.discardPile.Count - 1];
+            if ((temp.getNumber() <= maxCards) || (temp.getNumber() == Game1.JACK))
+            {
+                if (temp.getNumber() == Game1.JACK)
+                {
+                    hand = gamescreen.discardPile_pop();
+                    hasDrawn = true;
+                }
+                else
+                {
+                    if (!field[temp.getNumber() - 1].isVisible())
+                    {
+                        hand = gamescreen.discardPile_pop();
+                        hasDrawn = true;
+                    }
+                }
+            }
+            else
+            {
+                hand = gamescreen.deck_pop();
+                hasDrawn = true;
+            }
+            return;
+        }
         public void drawCard(MouseState clickLocation, GameScreen gamescreen)
         {
             if (clickLocation.LeftButton == ButtonState.Pressed)
@@ -63,7 +112,30 @@ namespace CS206Project
             }
             return;
         }
-
+        public void playCard(GameScreen gamescreen)
+        {
+            if (hand.getNumber() == Game1.JACK)
+            {
+                for (int i = 0; i < maxCards; i++)
+                {
+                    if (!field[i].isVisible())
+                    {
+                        Card temp = field[i];
+                        field[i] = hand;
+                        field[i].show();
+                        hand = temp;
+                        i = maxCards + 1;
+                    }
+                }
+            }
+            else
+            {
+                Card temp = field[hand.getNumber() - 1];
+                field[hand.getNumber() - 1] = hand;
+                field[hand.getNumber() - 1].show();
+                hand = temp;
+            }
+        }
         public void playCard(MouseState clickLocation, GameScreen gamescreen)
     {
         if (clickLocation.LeftButton == ButtonState.Pressed)
@@ -97,7 +169,38 @@ namespace CS206Project
 
 	  return;
     }
+        public bool discardCard(GameScreen gamescreen)
+        {
+            int nextPlayer;
+            bool hasDiscarded = false;
+            if (gamescreen.currentPlayer == 3)
+                nextPlayer = 0;
+            else
+                nextPlayer = gamescreen.currentPlayer + 1;
+            if (hand.getNumber() > gamescreen.players[nextPlayer].maxCards)
+            {
+                gamescreen.discardPile_push(hand);
+                hand = Card.Blank;
+                hasDiscarded = true;
+            }
+            else
+            {
+                if (!gamescreen.players[nextPlayer].field[hand.getNumber()-1].isVisible())
+                {
+                    for (int i = 0; i < maxCards; i++)
+                    {
+                        if (!field[i].isVisible())
+                        {
+                            hasDiscarded = buryCard(i, gamescreen);
+                            i = maxCards + 1;
+                        }
+                    }
+                }
+                
+            }
 
+            return hasDiscarded;
+        }
         public bool discardCard(MouseState clickLocation, GameScreen gamescreen)
         {
             bool hasDiscarded = false;
@@ -125,7 +228,6 @@ namespace CS206Project
             }
             return hasDiscarded;
         }
-
         public bool buryCard(int i, GameScreen gamescreen)
         {
             if(!field[i].isVisible())
@@ -174,8 +276,10 @@ namespace CS206Project
 
         public override bool Update(Game1 game, GameTime time, GameScreen gamescreen)
         {
-            if(gamescreen.currentPlayer == 0)
+            if (gamescreen.currentPlayer == 0)
                 turn(gamescreen);
+            else
+                computerTurn(gamescreen);
             return true;
         }
 
