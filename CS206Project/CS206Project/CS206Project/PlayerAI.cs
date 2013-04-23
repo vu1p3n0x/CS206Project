@@ -17,7 +17,7 @@ namespace CS206Project
             this.name = Name;
             maxCards = game.settings.getNumCards();
             hand = Card.Blank;
-            field = new List<Card>();
+            field = new List<Card>(maxCards);
         }
         ~PlayerAI()
         {

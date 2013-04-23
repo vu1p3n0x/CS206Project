@@ -22,7 +22,7 @@ namespace CS206Project
             name = string.Copy(newName);
             maxCards = game.settings.getNumCards();
             hand = Card.Blank;
-            field = new List<Card>();
+            field = new List<Card>(maxCards);
         }
           // adds a card to the field, for use in deal function
 
