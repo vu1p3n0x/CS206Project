@@ -19,7 +19,7 @@ namespace CS206Project
         public Rectangle deck_location;
         public Rectangle discard_location;
 
-        public List<Player> players = new List<Player>();
+        public List<PlayerBase> players = new List<PlayerBase>();
         public int currentPlayer;
 
         public override bool Initialize(Game1 game)
