@@ -148,7 +148,20 @@ namespace CS206Project
         {
             return new ScreenEmpty();
         }
-
+        public void deal()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                if (i < players[0].maxCards)
+                    players[0].field[i] = deck_pop();
+                if (i < players[1].maxCards)
+                    players[1].field[i] = deck_pop();
+                if (i < players[2].maxCards)
+                    players[2].field[i] = deck_pop();
+                if (i < players[3].maxCards)
+                    players[3].field[i] = deck_pop();
+            }
+        }
         private List<Card> shuffle(List<Card> deck)
         {
             var rand = new Random();
