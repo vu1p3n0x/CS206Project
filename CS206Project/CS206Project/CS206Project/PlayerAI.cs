@@ -12,9 +12,11 @@ namespace CS206Project
         private Card hand;
 
         // constructor and destructor
-        public PlayerAI()
+        public PlayerAI(Game1 game, GameScreen gameScreen, string Name)
         {
-            
+            this.name = Name;
+            maxCards = game.settings.getNumCards();
+            hand = Card.Blank;
         }
         ~PlayerAI()
         {
