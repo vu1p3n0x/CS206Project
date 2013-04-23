@@ -67,9 +67,9 @@ namespace CS206Project
             currentPlayer = 0;
 
             players.Add(new Player(game, this, game.settings.getPlayerName()));
-            players.Add(new Player(game, this, "Bob"));
-            players.Add(new Player(game, this, "Tom"));
-            players.Add(new Player(game, this, "Jerry"));
+            players.Add(new PlayerAI(game, this, "Bob"));
+            players.Add(new PlayerAI(game, this, "Tom"));
+            players.Add(new PlayerAI(game, this, "Jerry"));
 
             for (int i = 1; i <= 4; i++)
                 for (int j = 1; j <= Game1.KING; j++)
