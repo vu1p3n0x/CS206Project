@@ -13,48 +13,14 @@ namespace CS206Project
         public List<Card> discardPile = new List<Card>();
 
         Texture2D table;
+        Texture2D pixel;
         Rectangle background;
         public Rectangle[,] fields;
         public Rectangle deck_location;
         public Rectangle discard_location;
-        Texture2D pixel;
+
         public List<Player> players = new List<Player>();
-        Vector2 origin;
-
         public int currentPlayer;
-        public void deck_push(Card theCard)
-        {
-            deck.Add(theCard);
-            return;
-        }
-
-        public void discardPile_push(Card theCard)
-        {
-            discardPile.Add(theCard);
-            return;
-        }
-
-        public Card deck_pop()
-        {
-            Card temp;
-            if (deck.Count == 0)
-            {
-                temp = discardPile_pop();
-                deck = shuffle(discardPile);
-                discardPile.Clear();
-                discardPile_push(temp);
-            }
-            temp = deck[deck.Count - 1];
-            deck.RemoveAt(deck.Count - 1);
-            return temp;
-        }
-
-        public Card discardPile_pop()
-        {
-            Card temp = discardPile[discardPile.Count - 1];
-            discardPile.RemoveAt(discardPile.Count - 1);
-            return temp;
-        }
 
         public override bool Initialize(Game1 game)
         {
@@ -98,8 +64,6 @@ namespace CS206Project
             deck_location = new Rectangle(325, 250, 70, 100);
             discard_location = new Rectangle(400, 250, 70, 100);
             background = new Rectangle(0, 0, 780, 600);
-            origin.X = 0;
-            origin.Y = 0;
             currentPlayer = 0;
 
             players.Add(new Player(game, this, game.settings.getPlayerName()));
@@ -113,20 +77,17 @@ namespace CS206Project
             deck = shuffle(deck);
             return true;
         }
-
         public override bool LoadContent(Game1 game)
         {
             table = game.Content.Load<Texture2D>("Table_top copy");
             pixel = game.Content.Load<Texture2D>("pixel");
             return true;
         }
-
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
             players[currentPlayer].Update(game, time, this);
             return true;
         }
-
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
             //Draws background
@@ -142,14 +103,14 @@ namespace CS206Project
             game.spriteBatch.Draw(pixel, fields[0, 7], Color.White);
 
             //Draws player 1's field
-            game.spriteBatch.Draw(pixel, fields[1, 0], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 1], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 2], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 3], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 4], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 5], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 6], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 7], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 0], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 1], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 2], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 3], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 4], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 5], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 6], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[1, 7], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
 
 
             //Draws player 2's field
@@ -164,14 +125,14 @@ namespace CS206Project
 
 
             //Draws player 3's field
-            game.spriteBatch.Draw(pixel, fields[3, 0], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 1], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 2], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 3], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 4], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 5], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 6], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 7], null, Color.White, (float)1.57, origin, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 0], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 1], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 2], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 3], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 4], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 5], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 6], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            game.spriteBatch.Draw(pixel, fields[3, 7], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
 
 
             game.spriteBatch.Draw(pixel, deck_location, Color.White);
@@ -181,15 +142,13 @@ namespace CS206Project
 
         public override bool HasNextScreen()
         {
-
-            System.Threading.Thread.Sleep(5000);
-            throw new NotImplementedException();
+            return false;
         }
-
         public override Screen GetNextScreen()
         {
-            throw new NotImplementedException();
+            return new ScreenEmpty();
         }
+
         private List<Card> shuffle(List<Card> deck)
         {
             var rand = new Random();
@@ -218,6 +177,36 @@ namespace CS206Project
                 locationUsed = false;
             }
             return tempDeck;
+        }
+        public void deck_push(Card theCard)
+        {
+            deck.Add(theCard);
+            return;
+        }
+        public void discardPile_push(Card theCard)
+        {
+            discardPile.Add(theCard);
+            return;
+        }
+        public Card deck_pop()
+        {
+            Card temp;
+            if (deck.Count == 0)
+            {
+                temp = discardPile_pop();
+                deck = shuffle(discardPile);
+                discardPile.Clear();
+                discardPile_push(temp);
+            }
+            temp = deck[deck.Count - 1];
+            deck.RemoveAt(deck.Count - 1);
+            return temp;
+        }
+        public Card discardPile_pop()
+        {
+            Card temp = discardPile[discardPile.Count - 1];
+            discardPile.RemoveAt(discardPile.Count - 1);
+            return temp;
         }
     }
 }
