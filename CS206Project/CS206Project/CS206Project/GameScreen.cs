@@ -36,12 +36,24 @@ namespace CS206Project
 
         public Card deck_pop()
         {
-            return deck[deck.Count - 1];
+            Card temp;
+            if (deck.Count == 0)
+            {
+                temp = discardPile_pop();
+                deck = shuffle(discardPile);
+                discardPile.Clear();
+                discardPile_push(temp);
+            }
+            temp = deck[deck.Count - 1];
+            deck.RemoveAt(deck.Count - 1);
+            return temp;
         }
 
         public Card discardPile_pop()
         {
-            return discardPile[discardPile.Count - 1];
+            Card temp = discardPile[discardPile.Count - 1];
+            discardPile.RemoveAt(discardPile.Count - 1);
+            return temp;
         }
 
         public override bool Initialize(Game1 game)
