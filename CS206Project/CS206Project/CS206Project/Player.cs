@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 namespace CS206Project
 {
-    class Player
+    class Player : PlayerBase
     {
-        private string name;                            // name of the player
-        private int maxCards;                           // number of cards face-up needed to win this round
-        private List<Card> field;                       // vector to hold all the cards the player has on the table
+                                    // name of the player
+        // moved to playerBase      // number of cards face-up needed to win this round
+                                    // vector to hold all the cards the player has on the table
         private bool validPlays;                        // true if the player can play the card in their hand, false if they must discard or bury
         private Card hand;                              // card the player is currently holding during their turn
         private bool hasDrawn;
@@ -23,12 +23,7 @@ namespace CS206Project
             maxCards = game.settings.getNumCards();
             hand = Card.Blank;
         }
-
-        public void setName(string newName) { name = newName; }
-
-        public void setMaxCards(int numCards) { maxCards = numCards; }
-
-        public void addCard(Card theCard) { field.Add(theCard); }           // adds a card to the field, for use in deal function
+          // adds a card to the field, for use in deal function
 
         public void computerTurn(GameScreen gamescreen)
         {
@@ -259,19 +254,19 @@ namespace CS206Project
             return validPlays;
         }
 
-        public bool Initialize(Game1 game, GameScreen gamescreen)
+        public override bool Initialize(Game1 game, GameScreen gamescreen)
         {
 
             return true;
         }
 
-        public bool LoadContent(Game1 game)
+        public override bool LoadContent(Game1 game)
         {
 
             return true;
         }
 
-        public bool Update(Game1 game, GameTime time, GameScreen gamescreen)
+        public override bool Update(Game1 game, GameTime time, GameScreen gamescreen)
         {
             if (gamescreen.currentPlayer == 0)
                 turn(gamescreen);
@@ -281,13 +276,11 @@ namespace CS206Project
             return true;
         }
 
-        public bool Draw(Game1 game, GameTime time)
+        public override bool Draw(Game1 game, GameTime time)
         {
             
             return true;
         }
-
-        public static readonly Card Blank = new Card(0, 0);
     }
 
 }
