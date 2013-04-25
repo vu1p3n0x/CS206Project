@@ -179,6 +179,8 @@ namespace CS206Project
                 if (i < players[3].maxCards)
                     players[3].field.Add(deck_pop());
             }
+
+            discardPile_push(deck_pop());
         }
         private List<Card> shuffle(List<Card> deck)
         {
