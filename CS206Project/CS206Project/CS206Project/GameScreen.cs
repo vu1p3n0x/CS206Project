@@ -71,6 +71,8 @@ namespace CS206Project
             players.Add(new PlayerAI(game, this, "Tom"));
             players.Add(new PlayerAI(game, this, "Jerry"));
 
+            deck.Clear();
+            discardPile.Clear();
             for (int i = 1; i <= 4; i++)
                 for (int j = 1; j <= Game1.KING; j++)
                     deck.Add(new Card(j, i));
@@ -85,7 +87,15 @@ namespace CS206Project
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
-            players[currentPlayer].Update(game, time, this);
+            if (players[currentPlayer].hasWon)
+            {
+                for (int k = 0; k < 4; k++)
+                    if (players[k].hasWon)
+                        players[k].maxCards--;
+                InitializeGame(game);
+            }
+            else       
+                players[currentPlayer].Update(game, time, this);
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
@@ -220,6 +230,21 @@ namespace CS206Project
             Card temp = discardPile[discardPile.Count - 1];
             discardPile.RemoveAt(discardPile.Count - 1);
             return temp;
+        }
+
+        void InitializeGame(Game1 game)
+        {
+            currentPlayer = 0;
+            for (int k = 0; k < 4; k++)
+                players[k].field.Clear();
+            deck.Clear();
+            discardPile.Clear();
+            for (int i = 1; i <= 4; i++)
+                for (int j = 1; j <= Game1.KING; j++)
+                    deck.Add(new Card(j, i));
+            deck = shuffle(deck);
+            deal();
+            return;
         }
     }
 }

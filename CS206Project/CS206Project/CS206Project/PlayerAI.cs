@@ -49,12 +49,17 @@ namespace CS206Project
                 if (discardCard(gamescreen))
                 {
                     hasDrawn = false;
+                    hasWon = true;
+                    for (int i = 0; i < maxCards; i++)
+                    {
+                        if (!field[i].isVisible())
+                            hasWon = false;
+                    }
                     gamescreen.currentPlayer++;
                     if (gamescreen.currentPlayer == 4)
                         gamescreen.currentPlayer = 0;
                 }
             }
-
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
