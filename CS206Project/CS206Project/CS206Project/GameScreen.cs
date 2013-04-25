@@ -22,8 +22,12 @@ namespace CS206Project
         public List<PlayerBase> players = new List<PlayerBase>();
         public int currentPlayer;
 
+        bool hasDealt;
+
         public override bool Initialize(Game1 game)
         {
+            hasDealt = false;
+
             fields = new Rectangle[4,8];//current allowed max players
             fields[0, 0] = new Rectangle(250, 375, 70, 100);
             fields[0, 1] = new Rectangle(325, 375, 70, 100);
@@ -85,7 +89,17 @@ namespace CS206Project
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
+            // deal cards if it needs to be done
+            if (!hasDealt)
+            {
+                deal();
+                hasDealt = true;
+            }
+
+            // update the current player
             players[currentPlayer].Update(game, time, this);
+
+            // return with no error
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
@@ -153,13 +167,13 @@ namespace CS206Project
             for (int i = 0; i < 8; i++)
             {
                 if (i < players[0].maxCards)
-                    players[0].field[i] = deck_pop();
+                    players[0].field.Add(deck_pop());
                 if (i < players[1].maxCards)
-                    players[1].field[i] = deck_pop();
+                    players[1].field.Add(deck_pop());
                 if (i < players[2].maxCards)
-                    players[2].field[i] = deck_pop();
+                    players[2].field.Add(deck_pop());
                 if (i < players[3].maxCards)
-                    players[3].field[i] = deck_pop();
+                    players[3].field.Add(deck_pop());
             }
         }
         private List<Card> shuffle(List<Card> deck)
