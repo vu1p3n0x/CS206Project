@@ -180,7 +180,8 @@ namespace CS206Project
 
         public override bool Draw(Game1 game, GameTime time)
         {
-            
+            MouseState state = Mouse.GetState();
+            hand.Draw(game, new Rectangle(state.X, state.Y, 50, 100));
             return true;
         }
     }

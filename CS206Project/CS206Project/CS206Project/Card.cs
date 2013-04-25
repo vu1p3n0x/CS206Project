@@ -22,16 +22,17 @@ namespace CS206Project
             visible = false;
             return true;
         }
-        public void Draw(Game1 game, Rectangle dest)
+        public void Draw(Game1 game, Rectangle dest, float rotation = 0.0f)
         {
-            if (isVisible())
-            {
-                game.spriteBatch.Draw(game.settings.images, dest, game.settings.cardBacks[suit-1, number-1], Color.White);
-            }
+            Rectangle src;
+            if (visible)
+                src = new Rectangle(game.settings.images.Width / 13 * (number - 1), game.settings.images.Height / 5 * (suit - 1), game.settings.images.Width / 13, game.settings.images.Height / 5);
+            else if (number == 0 || suit == 0)
+                src = new Rectangle(game.settings.images.Width / 13 * (1), game.settings.images.Height / 5 * (4), game.settings.images.Width / 13, game.settings.images.Height / 5);
             else
-            {
-                game.spriteBatch.Draw(game.settings.images, dest, game.settings.cardBacks[4, 5], Color.White);
-            }
+                src = new Rectangle(game.settings.images.Width / 13 * (5), game.settings.images.Height / 5 * (4), game.settings.images.Width / 13, game.settings.images.Height / 5);
+
+            game.spriteBatch.Draw(game.settings.images, dest, src, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 1.0f);
         }
 
         public Card(int newNumber, int newSuit)

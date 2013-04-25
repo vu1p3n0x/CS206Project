@@ -64,7 +64,7 @@ namespace CS206Project
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void drawCard(GameScreen gamescreen)

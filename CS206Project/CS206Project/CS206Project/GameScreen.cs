@@ -112,40 +112,49 @@ namespace CS206Project
             players[0].field[7].Draw(game, fields[0, 7]);
 
             //Draws player 1's field
-            game.spriteBatch.Draw(pixel, fields[1, 0], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 1], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 2], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 3], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 4], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 5], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 6], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[1, 7], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            players[1].field[0].Draw(game, fields[1, 0], 1.57f);
+            players[1].field[1].Draw(game, fields[1, 1], 1.57f);
+            players[1].field[2].Draw(game, fields[1, 2], 1.57f);
+            players[1].field[3].Draw(game, fields[1, 3], 1.57f);
+            players[1].field[4].Draw(game, fields[1, 4], 1.57f);
+            players[1].field[5].Draw(game, fields[1, 5], 1.57f);
+            players[1].field[6].Draw(game, fields[1, 6], 1.57f);
+            players[1].field[7].Draw(game, fields[1, 7], 1.57f);
 
 
             //Draws player 2's field
-            game.spriteBatch.Draw(pixel, fields[2, 0], Color.White);
-            game.spriteBatch.Draw(pixel, fields[2, 1], Color.White);
-            game.spriteBatch.Draw(pixel, fields[2, 2], Color.White);
-            game.spriteBatch.Draw(pixel, fields[2, 3], Color.White);
-            game.spriteBatch.Draw(pixel, fields[2, 4], Color.White);
-            game.spriteBatch.Draw(pixel, fields[2, 5], Color.White);
-            game.spriteBatch.Draw(pixel, fields[2, 6], Color.White);
-            game.spriteBatch.Draw(pixel, fields[2, 7], Color.White);
+            players[2].field[0].Draw(game, fields[2, 0]);
+            players[2].field[1].Draw(game, fields[2, 1]);
+            players[2].field[2].Draw(game, fields[2, 2]);
+            players[2].field[3].Draw(game, fields[2, 3]);
+            players[2].field[4].Draw(game, fields[2, 4]);
+            players[2].field[5].Draw(game, fields[2, 5]);
+            players[2].field[6].Draw(game, fields[2, 6]);
+            players[2].field[7].Draw(game, fields[2, 7]);
 
 
             //Draws player 3's field
-            game.spriteBatch.Draw(pixel, fields[3, 0], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 1], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 2], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 3], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 4], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 5], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 6], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
-            game.spriteBatch.Draw(pixel, fields[3, 7], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);
+            players[3].field[0].Draw(game, fields[3, 0], 1.57f);
+            players[3].field[1].Draw(game, fields[3, 1], 1.57f);
+            players[3].field[2].Draw(game, fields[3, 2], 1.57f);
+            players[3].field[3].Draw(game, fields[3, 3], 1.57f);
+            players[3].field[4].Draw(game, fields[3, 4], 1.57f);
+            players[3].field[5].Draw(game, fields[3, 5], 1.57f);
+            players[3].field[6].Draw(game, fields[3, 6], 1.57f);
+            players[3].field[7].Draw(game, fields[3, 7], 1.57f);
 
 
-            game.spriteBatch.Draw(pixel, deck_location, Color.White);
-            game.spriteBatch.Draw(pixel, discard_location, Color.White);
+            // draw deck pile
+            deck[0].Draw(game, deck_location);
+
+            // draw discard pile
+            if (discardPile.Count > 0)
+                discardPile[discardPile.Count - 1].Draw(game, discard_location);
+            else
+                Card.Blank.Draw(game, discard_location);
+
+            players[currentPlayer].Draw(game, time);
+
             return true;
         }
 
