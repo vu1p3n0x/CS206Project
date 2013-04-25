@@ -48,9 +48,12 @@ namespace CS206Project
         /// </summary>
         protected override void Initialize()
         {
+            settings = new Settings();
+            settings.Initialize();
+
             screens.Push(new MainScreen()); 
             screens.Peek().Initialize(this);
-            settings = new Settings();
+
             base.Initialize();
         }
 

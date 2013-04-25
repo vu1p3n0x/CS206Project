@@ -16,6 +16,13 @@ namespace CS206Project
         public Rectangle[,] cardBacks = new Rectangle[5,13];
         Texture2D table;
 
+        public bool Initialize()
+        {
+            numCards = 8;
+            maxPlayers = 4;
+            return true;
+        }
+
         public bool LoadContent(Game1 game)
         {
             images = game.Content.Load<Texture2D>("card_images");

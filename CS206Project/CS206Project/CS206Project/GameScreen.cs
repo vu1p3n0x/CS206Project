@@ -22,8 +22,12 @@ namespace CS206Project
         public List<PlayerBase> players = new List<PlayerBase>();
         public int currentPlayer;
 
+        bool hasDealt;
+
         public override bool Initialize(Game1 game)
         {
+            hasDealt = false;
+
             fields = new Rectangle[4,8];//current allowed max players
             fields[0, 0] = new Rectangle(250, 375, 70, 100);
             fields[0, 1] = new Rectangle(325, 375, 70, 100);
@@ -64,19 +68,13 @@ namespace CS206Project
             deck_location = new Rectangle(325, 250, 70, 100);
             discard_location = new Rectangle(400, 250, 70, 100);
             background = new Rectangle(0, 0, 780, 600);
-            currentPlayer = 0;
 
             players.Add(new Player(game, this, game.settings.getPlayerName()));
             players.Add(new PlayerAI(game, this, "Bob"));
             players.Add(new PlayerAI(game, this, "Tom"));
             players.Add(new PlayerAI(game, this, "Jerry"));
 
-            deck.Clear();
-            discardPile.Clear();
-            for (int i = 1; i <= 4; i++)
-                for (int j = 1; j <= Game1.KING; j++)
-                    deck.Add(new Card(j, i));
-            deck = shuffle(deck);
+            InitializeGame(game);
             return true;
         }
         public override bool LoadContent(Game1 game)
@@ -96,6 +94,7 @@ namespace CS206Project
             }
             else       
                 players[currentPlayer].Update(game, time, this);
+
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
@@ -163,13 +162,13 @@ namespace CS206Project
             for (int i = 0; i < 8; i++)
             {
                 if (i < players[0].maxCards)
-                    players[0].field[i] = deck_pop();
+                    players[0].field.Add(deck_pop());
                 if (i < players[1].maxCards)
-                    players[1].field[i] = deck_pop();
+                    players[1].field.Add(deck_pop());
                 if (i < players[2].maxCards)
-                    players[2].field[i] = deck_pop();
+                    players[2].field.Add(deck_pop());
                 if (i < players[3].maxCards)
-                    players[3].field[i] = deck_pop();
+                    players[3].field.Add(deck_pop());
             }
         }
         private List<Card> shuffle(List<Card> deck)
