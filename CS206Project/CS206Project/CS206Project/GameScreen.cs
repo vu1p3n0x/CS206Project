@@ -149,7 +149,7 @@ namespace CS206Project
 
             // draw discard pile
             if (discardPile.Count > 0)
-                discardPile[discardPile.Count - 1].Draw(game, discard_location);
+                discardPile[discardPile.Count-1].Draw(game, discard_location);
             else
                 Card.Blank.Draw(game, discard_location);
 
@@ -216,6 +216,7 @@ namespace CS206Project
         }
         public void discardPile_push(Card theCard)
         {
+            theCard.show();
             discardPile.Add(theCard);
             return;
         }
