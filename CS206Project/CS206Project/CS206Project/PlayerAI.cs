@@ -100,7 +100,7 @@ namespace CS206Project
                 validPlays = false;
             else if (hand.getNumber() != Game1.JACK)
             {
-                if (field[hand.getNumber()].isVisible() && (field[hand.getNumber()].getNumber() != Game1.JACK))
+                if (field[hand.getNumber()-1].isVisible() && (field[hand.getNumber()-1].getNumber() != Game1.JACK))
                     validPlays = false;
             }
             return validPlays;

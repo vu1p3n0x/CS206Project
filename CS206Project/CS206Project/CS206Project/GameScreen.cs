@@ -92,7 +92,7 @@ namespace CS206Project
                         players[k].maxCards--;
                 InitializeGame(game);
             }
-            else       
+            else
                 players[currentPlayer].Update(game, time, this);
             return true;
         }

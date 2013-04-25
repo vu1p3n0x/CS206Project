@@ -61,6 +61,7 @@ namespace CS206Project
                 if (gamescreen.deck_location.Contains(clickLocation.X, clickLocation.Y))
                 {
                     hand = gamescreen.deck_pop();
+                    hand.show();
                     hasDrawn = true;
                 }
                 else if (gamescreen.discard_location.Contains(clickLocation.X, clickLocation.Y))
@@ -88,6 +89,7 @@ namespace CS206Project
                             field[i] = hand;
                             field[i].show();
                             hand = temp;
+                            hand.show();
                             i = maxCards + 1;
                         }
                         else if (field[i].isVisible() && (field[i].getNumber() == Game1.JACK))
@@ -96,6 +98,7 @@ namespace CS206Project
                             field[i] = hand;
                             field[i].show();
                             hand = temp;
+                            hand.show();
                             i = maxCards + 1;
                         }
                     }
@@ -153,7 +156,7 @@ namespace CS206Project
                 validPlays = false;
             else if (hand.getNumber() != Game1.JACK)
             {
-                if (field[hand.getNumber()].isVisible() && (field[hand.getNumber()].getNumber() != Game1.JACK))
+                if (field[hand.getNumber()-1].isVisible() && (field[hand.getNumber()-1].getNumber() != Game1.JACK))
                     validPlays = false;
             }
             return validPlays;
@@ -181,7 +184,8 @@ namespace CS206Project
         public override bool Draw(Game1 game, GameTime time)
         {
             MouseState state = Mouse.GetState();
-            hand.Draw(game, new Rectangle(state.X, state.Y, 50, 100));
+            if (hand != Card.Blank)
+                hand.Draw(game, new Rectangle(state.X - 36, state.Y - 50, 72, 100));
             return true;
         }
     }
