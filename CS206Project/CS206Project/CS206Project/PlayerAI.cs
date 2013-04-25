@@ -135,6 +135,12 @@ namespace CS206Project
 
             }
 
+            if (!hasDiscarded)
+            {
+                gamescreen.discardPile_push(hand);
+                hand = Card.Blank;
+            }
+
             return hasDiscarded;
         }
         public void playCard(GameScreen gamescreen)
