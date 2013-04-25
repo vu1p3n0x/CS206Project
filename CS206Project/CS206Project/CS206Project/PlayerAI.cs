@@ -69,30 +69,17 @@ namespace CS206Project
 
         public void drawCard(GameScreen gamescreen)
         {
-            Card temp;
-            temp = gamescreen.discardPile[gamescreen.discardPile.Count - 1];
-            if ((temp.getNumber() <= maxCards) || (temp.getNumber() == Game1.JACK))
+            Card temp = gamescreen.discardPile[gamescreen.discardPile.Count - 1];
+            if (temp.getNumber() == Game1.JACK || (temp.getNumber() <= maxCards && (!field[temp.getNumber()-1].isVisible() || (field[temp.getNumber()-1].isVisible() && field[temp.getNumber()-1].getNumber() == Game1.JACK))))
             {
-                if (temp.getNumber() == Game1.JACK)
-                {
-                    hand = gamescreen.discardPile_pop();
-                    hasDrawn = true;
-                }
-                else
-                {
-                    if (!field[temp.getNumber() - 1].isVisible())
-                    {
-                        hand = gamescreen.discardPile_pop();
-                        hasDrawn = true;
-                    }
-                }
+                hand = gamescreen.discardPile_pop();
+                hasDrawn = true;
             }
             else
             {
                 hand = gamescreen.deck_pop();
                 hasDrawn = true;
             }
-            return;
         }
         public bool playCheck()
         {
