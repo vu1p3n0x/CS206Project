@@ -102,15 +102,14 @@ namespace CS206Project
             game.spriteBatch.Draw(table,background,Color.White);
 
             //Draws player 0's (user) field
-            // game.spriteBatch.Draw(game.settings.images, fields[0, 0], game.settings.cardBacks[players[0].field[0].getSuit(), players[0].field[0].getNumber()], Color.White);
-            game.spriteBatch.Draw(pixel, fields[0, 0], Color.White);
-            game.spriteBatch.Draw(pixel, fields[0, 1], Color.White);
-            game.spriteBatch.Draw(pixel, fields[0, 2], Color.White);
-            game.spriteBatch.Draw(pixel, fields[0, 3], Color.White);
-            game.spriteBatch.Draw(pixel, fields[0, 4], Color.White);
-            game.spriteBatch.Draw(pixel, fields[0, 5], Color.White);
-            game.spriteBatch.Draw(pixel, fields[0, 6], Color.White);
-            game.spriteBatch.Draw(pixel, fields[0, 7], Color.White);
+            players[0].field[0].Draw(game, fields[0, 0]);
+            players[0].field[1].Draw(game, fields[0, 1]);
+            players[0].field[2].Draw(game, fields[0, 2]);
+            players[0].field[3].Draw(game, fields[0, 3]);
+            players[0].field[4].Draw(game, fields[0, 4]);
+            players[0].field[5].Draw(game, fields[0, 5]);
+            players[0].field[6].Draw(game, fields[0, 6]);
+            players[0].field[7].Draw(game, fields[0, 7]);
 
             //Draws player 1's field
             game.spriteBatch.Draw(pixel, fields[1, 0], null, Color.White, (float)1.57, Vector2.Zero, SpriteEffects.None, (float)0);

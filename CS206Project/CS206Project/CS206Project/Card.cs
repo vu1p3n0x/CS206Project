@@ -22,6 +22,17 @@ namespace CS206Project
             visible = false;
             return true;
         }
+        public void Draw(Game1 game, Rectangle dest)
+        {
+            if (isVisible())
+            {
+                game.spriteBatch.Draw(game.settings.images, dest, game.settings.cardBacks[suit-1, number-1], Color.White);
+            }
+            else
+            {
+                game.spriteBatch.Draw(game.settings.images, dest, game.settings.cardBacks[4, 5], Color.White);
+            }
+        }
 
         public Card(int newNumber, int newSuit)
         {
