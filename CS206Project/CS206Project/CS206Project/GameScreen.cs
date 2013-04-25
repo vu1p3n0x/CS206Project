@@ -94,14 +94,15 @@ namespace CS206Project
             }
             else       
                 players[currentPlayer].Update(game, time, this);
-
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
             //Draws background
             game.spriteBatch.Draw(table,background,Color.White);
+
             //Draws player 0's (user) field
+            // game.spriteBatch.Draw(game.settings.images, fields[0, 0], game.settings.cardBacks[players[0].field[0].getSuit(), players[0].field[0].getNumber()], Color.White);
             game.spriteBatch.Draw(pixel, fields[0, 0], Color.White);
             game.spriteBatch.Draw(pixel, fields[0, 1], Color.White);
             game.spriteBatch.Draw(pixel, fields[0, 2], Color.White);
