@@ -38,28 +38,35 @@ namespace CS206Project
             
             
             // Draw a card
-            drawCard(gamescreen);
-
-            // continue to play if one is available
-            while (canPlay())
+            if (!hasDrawn)
             {
+                drawCard(gamescreen);
+                hasDrawn = true;
+            }
+            else if (canPlay())
+            {
+                // continue to play if one is available
                 playCard(gamescreen);
             }
-
-            // Discard when there are no more plays
-            discardCard(gamescreen);
-
-            hasWon = true;
-            for (int i = 0; i < maxCards; i++)
+            else
             {
-                if (!field[i].isVisible())
-                    hasWon = false;
+                // Discard when there are no more plays
+                discardCard(gamescreen);
+                hasDrawn = false;
+                hasWon = true;
+
+                for (int i = 0; i < maxCards; i++)
+                {
+                    if (!field[i].isVisible())
+                        hasWon = false;
+                }
+                gamescreen.currentPlayer++;
+                if (gamescreen.currentPlayer == 4)
+                    gamescreen.currentPlayer = 0;
             }
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(250);
             // move to next player
-            gamescreen.currentPlayer++;
-            if (gamescreen.currentPlayer == 4)
-                gamescreen.currentPlayer = 0;
+
             
             return true;
         }
@@ -101,7 +108,10 @@ namespace CS206Project
                 {
                     if (!field[hand.getNumber() - 1].isVisible())
                         return true;
+                    else if (field[hand.getNumber() - 1].isVisible() && (field[hand.getNumber() - 1].getNumber() == Game1.JACK))
+                        return true;
                     else
+
                         return false;
                 }
             }
