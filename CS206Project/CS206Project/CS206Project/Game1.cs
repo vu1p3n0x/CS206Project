@@ -31,6 +31,7 @@ namespace CS206Project
         {
             IsMouseVisible = true;
             graphics = new GraphicsDeviceManager(this);
+            IsFixedTimeStep = false;
 
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 780;

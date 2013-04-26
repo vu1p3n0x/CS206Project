@@ -153,13 +153,31 @@ namespace CS206Project
 
         public bool playCheck()
         {
-            if ((hand.getNumber() > maxCards) && (hand.getNumber() != Game1.JACK))
+            if (hand.getNumber() > maxCards && hand.getNumber() != Game1.JACK)
                 validPlays = false;
-            else if (hand.getNumber() != Game1.JACK)
+            else
             {
-                if (field[hand.getNumber()-1].isVisible() && (field[hand.getNumber()-1].getNumber() != Game1.JACK))
+                if (hand.getNumber() == Game1.JACK)
+                {
+                    for (int i = 0; i < maxCards; i++)
+                        if (!field[i].isVisible())
+                        {
+                            validPlays = true;
+                            return validPlays;
+                        }
                     validPlays = false;
+                }
+                else
+                {
+                    if (!field[hand.getNumber() - 1].isVisible())
+                        validPlays = true;
+                    else if (field[hand.getNumber() - 1].isVisible() && (field[hand.getNumber() - 1].getNumber() == Game1.JACK))
+                        validPlays = true;
+                    else
+                        validPlays = false;
+                }
             }
+
             return validPlays;
         }
 
