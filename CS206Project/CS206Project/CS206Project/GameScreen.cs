@@ -22,12 +22,8 @@ namespace CS206Project
         public List<PlayerBase> players = new List<PlayerBase>();
         public int currentPlayer;
 
-        bool hasDealt;
-
         public override bool Initialize(Game1 game)
         {
-            hasDealt = false;
-
             fields = new Rectangle[4,8];//current allowed max players
             fields[0, 0] = new Rectangle(250, 375, 70, 100);
             fields[0, 1] = new Rectangle(325, 375, 70, 100);
