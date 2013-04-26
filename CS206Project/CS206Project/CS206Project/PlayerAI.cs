@@ -35,6 +35,8 @@ namespace CS206Project
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time, GameScreen gamescreen)
         {
+            
+            
             // Draw a card
             drawCard(gamescreen);
 
@@ -46,33 +48,19 @@ namespace CS206Project
 
             // Discard when there are no more plays
             discardCard(gamescreen);
+
+            hasWon = true;
+            for (int i = 0; i < maxCards; i++)
+            {
+                if (!field[i].isVisible())
+                    hasWon = false;
+            }
             System.Threading.Thread.Sleep(1000);
             // move to next player
             gamescreen.currentPlayer++;
             if (gamescreen.currentPlayer == 4)
                 gamescreen.currentPlayer = 0;
-
-            /*
-            {
-                playCard(gamescreen);
-            }
-            else if (!canPlay())
-            {
-                if (discardCard(gamescreen))
-                {
-                    hasDrawn = false;
-                    hasWon = true;
-                    for (int i = 0; i < maxCards; i++)
-                    {
-                        if (!field[i].isVisible())
-                            hasWon = false;
-                    }
-                    gamescreen.currentPlayer++;
-                    if (gamescreen.currentPlayer == 4)
-                        gamescreen.currentPlayer = 0;
-                }
-            }
-            */
+            
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)

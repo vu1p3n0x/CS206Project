@@ -84,8 +84,11 @@ namespace CS206Project
             if (players[currentPlayer].hasWon)
             {
                 for (int k = 0; k < 4; k++)
+                {
                     if (players[k].hasWon)
                         players[k].maxCards--;
+                    players[k].hasWon = false;
+                }
                 InitializeGame(game);
             }
             else
@@ -200,10 +203,12 @@ namespace CS206Project
 
             if (deck.Count == 0)
             {
-                temp = discardPile_pop();
+                for (int i = 0; i < discardPile.Count; i++)
+                {
+                    discardPile[i].hide();
+                }
                 deck = shuffle(discardPile);
                 discardPile.Clear();
-                discardPile_push(temp);
             }
             return temp;
         }
