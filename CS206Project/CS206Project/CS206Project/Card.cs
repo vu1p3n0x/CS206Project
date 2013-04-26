@@ -59,6 +59,10 @@ namespace CS206Project
         {
             visible = true;
         }
+        public void hide()
+        {
+            visible = false;
+        }
 
         public static bool operator== (Card lhs, Card rhs)
         {

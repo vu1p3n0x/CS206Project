@@ -35,16 +35,28 @@ namespace CS206Project
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time, GameScreen gamescreen)
         {
-            validPlays = true;
-            if (!hasDrawn)
-            {
-                drawCard(gamescreen);
-            }
-            else if (playCheck())
+            // Draw a card
+            drawCard(gamescreen);
+
+            // continue to play if one is available
+            while (canPlay())
             {
                 playCard(gamescreen);
             }
-            else if (!playCheck())
+
+            // Discard when there are no more plays
+            discardCard(gamescreen);
+
+            // move to next player
+            gamescreen.currentPlayer++;
+            if (gamescreen.currentPlayer == 4)
+                gamescreen.currentPlayer = 0;
+
+            /*
+            {
+                playCard(gamescreen);
+            }
+            else if (!canPlay())
             {
                 if (discardCard(gamescreen))
                 {
@@ -60,6 +72,7 @@ namespace CS206Project
                         gamescreen.currentPlayer = 0;
                 }
             }
+            */
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
@@ -80,17 +93,30 @@ namespace CS206Project
                 hand = gamescreen.deck_pop();
                 hasDrawn = true;
             }
+
+            hand.show();
         }
-        public bool playCheck()
+        public bool canPlay()
         {
-            if ((hand.getNumber() > maxCards) && (hand.getNumber() != Game1.JACK))
-                validPlays = false;
-            else if (hand.getNumber() != Game1.JACK)
+            if (hand.getNumber() > maxCards && hand.getNumber() != Game1.JACK)
+                return false;
+            else
             {
-                if (field[hand.getNumber()-1].isVisible() && (field[hand.getNumber()-1].getNumber() != Game1.JACK))
-                    validPlays = false;
+                if (hand.getNumber() == Game1.JACK)
+                {
+                    for (int i = 0; i < maxCards; i++)
+                        if (!field[i].isVisible())
+                            return true;
+                    return false;
+                }
+                else
+                {
+                    if (!field[hand.getNumber() - 1].isVisible())
+                        return true;
+                    else
+                        return false;
+                }
             }
-            return validPlays;
         }
         public bool discardCard(GameScreen gamescreen)
         {
@@ -135,23 +161,21 @@ namespace CS206Project
             if (hand.getNumber() == Game1.JACK)
             {
                 for (int i = 0; i < maxCards; i++)
-                {
                     if (!field[i].isVisible())
                     {
                         Card temp = field[i];
                         field[i] = hand;
-                        field[i].show();
                         hand = temp;
-                        i = maxCards + 1;
+                        hand.show();
+                        return;
                     }
-                }
             }
             else
             {
-                Card temp = field[hand.getNumber() - 1];
+                Card temp = field[hand.getNumber()-1];
                 field[hand.getNumber() - 1] = hand;
-                field[hand.getNumber() - 1].show();
                 hand = temp;
+                hand.show();
             }
         }
         public bool buryCard(int i, GameScreen gamescreen)
@@ -159,6 +183,7 @@ namespace CS206Project
             if (!field[i].isVisible())
             {
                 Card temp = field[i];
+                hand.hide();
                 field[i] = hand;
                 gamescreen.discardPile_push(temp);
                 hand = Card.Blank;

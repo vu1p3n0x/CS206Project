@@ -102,46 +102,20 @@ namespace CS206Project
             game.spriteBatch.Draw(table,background,Color.White);
 
             //Draws player 0's (user) field
-            players[0].field[0].Draw(game, fields[0, 0]);
-            players[0].field[1].Draw(game, fields[0, 1]);
-            players[0].field[2].Draw(game, fields[0, 2]);
-            players[0].field[3].Draw(game, fields[0, 3]);
-            players[0].field[4].Draw(game, fields[0, 4]);
-            players[0].field[5].Draw(game, fields[0, 5]);
-            players[0].field[6].Draw(game, fields[0, 6]);
-            players[0].field[7].Draw(game, fields[0, 7]);
+            for (int i = 0; i < players[0].maxCards; i++)
+                players[0].field[i].Draw(game, fields[0, i]);
 
             //Draws player 1's field
-            players[1].field[0].Draw(game, fields[1, 0], 1.57f);
-            players[1].field[1].Draw(game, fields[1, 1], 1.57f);
-            players[1].field[2].Draw(game, fields[1, 2], 1.57f);
-            players[1].field[3].Draw(game, fields[1, 3], 1.57f);
-            players[1].field[4].Draw(game, fields[1, 4], 1.57f);
-            players[1].field[5].Draw(game, fields[1, 5], 1.57f);
-            players[1].field[6].Draw(game, fields[1, 6], 1.57f);
-            players[1].field[7].Draw(game, fields[1, 7], 1.57f);
-
+            for (int i = 0; i < players[1].maxCards; i++)
+                players[1].field[i].Draw(game, fields[1, i], 1.57f);
 
             //Draws player 2's field
-            players[2].field[0].Draw(game, fields[2, 0]);
-            players[2].field[1].Draw(game, fields[2, 1]);
-            players[2].field[2].Draw(game, fields[2, 2]);
-            players[2].field[3].Draw(game, fields[2, 3]);
-            players[2].field[4].Draw(game, fields[2, 4]);
-            players[2].field[5].Draw(game, fields[2, 5]);
-            players[2].field[6].Draw(game, fields[2, 6]);
-            players[2].field[7].Draw(game, fields[2, 7]);
-
+            for (int i = 0; i < players[2].maxCards; i++)
+                players[2].field[i].Draw(game, fields[2, i]);
 
             //Draws player 3's field
-            players[3].field[0].Draw(game, fields[3, 0], 1.57f);
-            players[3].field[1].Draw(game, fields[3, 1], 1.57f);
-            players[3].field[2].Draw(game, fields[3, 2], 1.57f);
-            players[3].field[3].Draw(game, fields[3, 3], 1.57f);
-            players[3].field[4].Draw(game, fields[3, 4], 1.57f);
-            players[3].field[5].Draw(game, fields[3, 5], 1.57f);
-            players[3].field[6].Draw(game, fields[3, 6], 1.57f);
-            players[3].field[7].Draw(game, fields[3, 7], 1.57f);
+            for (int i = 0; i < players[3].maxCards; i++)
+                players[3].field[i].Draw(game, fields[3, i], 1.57f);
 
 
             // draw deck pile
@@ -204,6 +178,7 @@ namespace CS206Project
                 }
                 if (!locationUsed)
                 {
+                    tempCard.hide();
                     tempDeck.Add(tempCard);
                     i++;
                 }
@@ -224,7 +199,9 @@ namespace CS206Project
         }
         public Card deck_pop()
         {
-            Card temp;
+            Card temp = deck[deck.Count - 1];
+            deck.RemoveAt(deck.Count - 1);
+
             if (deck.Count == 0)
             {
                 temp = discardPile_pop();
@@ -232,8 +209,6 @@ namespace CS206Project
                 discardPile.Clear();
                 discardPile_push(temp);
             }
-            temp = deck[deck.Count - 1];
-            deck.RemoveAt(deck.Count - 1);
             return temp;
         }
         public Card discardPile_pop()
