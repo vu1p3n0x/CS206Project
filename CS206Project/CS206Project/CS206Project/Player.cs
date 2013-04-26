@@ -142,6 +142,7 @@ namespace CS206Project
             {
                 Card temp = field[i];
                 field[i] = hand;
+                field[i].hide();
                 gamescreen.discardPile_push(temp);
                 hand = Card.Blank;
                 return true;

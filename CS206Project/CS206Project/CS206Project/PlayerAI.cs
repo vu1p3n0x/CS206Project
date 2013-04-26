@@ -46,7 +46,7 @@ namespace CS206Project
 
             // Discard when there are no more plays
             discardCard(gamescreen);
-
+            System.Threading.Thread.Sleep(1000);
             // move to next player
             gamescreen.currentPlayer++;
             if (gamescreen.currentPlayer == 4)
@@ -185,6 +185,7 @@ namespace CS206Project
                 Card temp = field[i];
                 hand.hide();
                 field[i] = hand;
+                field[i].hide();
                 gamescreen.discardPile_push(temp);
                 hand = Card.Blank;
                 return true;
