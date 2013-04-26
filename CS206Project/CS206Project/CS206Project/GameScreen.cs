@@ -15,9 +15,11 @@ namespace CS206Project
         Texture2D table;
         Texture2D pixel;
         Rectangle background;
+        SpriteFont font;
         public Rectangle[,] fields;
         public Rectangle deck_location;
         public Rectangle discard_location;
+        Rectangle ULTIMATE_VICTOR_LOCATION;
 
         public List<PlayerBase> players = new List<PlayerBase>();
         public int currentPlayer;
@@ -60,6 +62,8 @@ namespace CS206Project
             fields[3, 5] = new Rectangle(760, 225, 70, 100);
             fields[3, 6] = new Rectangle(760, 300, 70, 100);
             fields[3, 7] = new Rectangle(760, 375, 70, 100);
+            ULTIMATE_VICTOR_LOCATION = new Rectangle(120, 100, 540, 400);
+
 
             deck_location = new Rectangle(325, 250, 70, 100);
             discard_location = new Rectangle(400, 250, 70, 100);
@@ -69,6 +73,7 @@ namespace CS206Project
             players.Add(new PlayerAI(game, this, "Bob"));
             players.Add(new PlayerAI(game, this, "Tom"));
             players.Add(new PlayerAI(game, this, "Jerry"));
+            font = game.Content.Load<SpriteFont>("mainfont");
 
             InitializeGame(game);
             return true;
@@ -88,6 +93,8 @@ namespace CS206Project
                     if (players[k].hasWon)
                         players[k].maxCards--;
                     players[k].hasWon = false;
+                    if (players[k].maxCards == 0)
+                        players[k].ULTIMATE_VICTOR = true;
                 }
                 InitializeGame(game);
             }
@@ -128,6 +135,12 @@ namespace CS206Project
 
             players[currentPlayer].Draw(game, time);
 
+            for(int k = 0; k < 4; k++)
+                if(players[k].ULTIMATE_VICTOR)
+                {
+                    game.spriteBatch.DrawString(font, players[k].name, new Vector2(ULTIMATE_VICTOR_LOCATION.X, ULTIMATE_VICTOR_LOCATION.Y), Color.White);
+                    k = 4;
+                }
             return true;
         }
 

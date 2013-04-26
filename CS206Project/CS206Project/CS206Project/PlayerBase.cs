@@ -12,6 +12,7 @@ namespace CS206Project
         public int maxCards;
         public List<Card> field;
         public bool hasWon = false;
+        public bool ULTIMATE_VICTOR = false;
 
         // constructors and destructors
         public PlayerBase()
