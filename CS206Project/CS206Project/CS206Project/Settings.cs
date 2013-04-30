@@ -19,7 +19,6 @@ namespace CS206Project
         public Texture2D pixel;
 
         public SpriteFont font;
-
         // constructor and destructor
         public Settings()
         {
@@ -49,7 +48,10 @@ namespace CS206Project
             images = game.Content.Load<Texture2D>("card_images");
             table = game.Content.Load<Texture2D>("Table_top copy");
             pixel = game.Content.Load<Texture2D>("pixel");
+
+            // load font
             font = game.Content.Load<SpriteFont>("mainfont");
+
             return true;
         }
         // accessor functions
