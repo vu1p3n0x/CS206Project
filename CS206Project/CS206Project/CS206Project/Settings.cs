@@ -9,86 +9,79 @@ namespace CS206Project
 {
     public class Settings
     {
+        // variables
         int numCards;
         int maxPlayers;
         string playerName;
+
         public Texture2D images;
-        public Rectangle[,] cardBacks = new Rectangle[5,13];
-        Texture2D table;
+        public Texture2D table;
+        public Texture2D pixel;
 
-        public bool Initialize()
-        {
-            numCards = 8;
-            maxPlayers = 4;
-            return true;
-        }
+        public SpriteFont font;
 
-        public bool LoadContent(Game1 game)
-        {
-            images = game.Content.Load<Texture2D>("card_images");
-            table = game.Content.Load<Texture2D>("Table_top copy");
-            loadCardBacks();
-            return true;
-        }
-
+        // constructor and destructor
         public Settings()
         {
+            // set default values
             numCards = 8;
             maxPlayers = 4;
             playerName = "Ladeda";
         }
+        ~Settings()
+        {
 
+        }
+
+        // basic functions
+        public bool Initialize()
+        {
+            // set default values
+            numCards = 8;
+            maxPlayers = 4;
+            playerName = "N/A";
+
+            return true;
+        }
+        public bool LoadContent(Game1 game)
+        {
+            // load images
+            images = game.Content.Load<Texture2D>("card_images");
+            table = game.Content.Load<Texture2D>("Table_top copy");
+            pixel = game.Content.Load<Texture2D>("pixel");
+
+            // load font
+            font = game.Content.Load<SpriteFont>("mainfont");
+
+            return true;
+        }
+
+        // accessor functions
         public int getNumCards()
         {
             return numCards;
         }
-        
         public int getMaxPlayers()
         {
             return maxPlayers;
         }
-
         public string getPlayerName()
         {
             return playerName;
         }
 
+        // mutator functions
         public void setNumCards(int n)
         {
             numCards = n;
         }
-
         public void setMaxPlayers(int n)
         {
             maxPlayers = n;
         }
-
         public void setPlayerName(string name)
         {
             playerName = name;
-        }
-
-        private void loadCardBacks()
-        {
-            Rectangle temp;
-            const int NUM_COLUMNS = 13;
-            const int NUM_ROWS = 5;
-            int width = images.Width / NUM_COLUMNS;
-            int height = images.Height / NUM_ROWS;
-            int currentFrame = 0;
-            int row;
-            int column;
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 13; j++)
-                {
-                    row = (int)((float)currentFrame / (float) NUM_COLUMNS);
-                    column = currentFrame % NUM_COLUMNS;
-                    temp = new Rectangle(width * column, height * row, width, height);
-                    cardBacks[i, j] = temp;
-                    currentFrame++;
-                }
-            }
         }
     }
 }
