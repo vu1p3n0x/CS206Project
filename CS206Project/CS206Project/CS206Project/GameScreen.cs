@@ -23,6 +23,7 @@ namespace CS206Project
 
         public List<PlayerBase> players = new List<PlayerBase>();
         public int currentPlayer;
+        bool ULTIMATE_VICTOR_DETERMINED = false;
 
         public override bool Initialize(Game1 game)
         {
@@ -86,20 +87,23 @@ namespace CS206Project
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
-            if (players[currentPlayer].hasWon)
+            if (ULTIMATE_VICTOR_DETERMINED == false)
             {
-                for (int k = 0; k < 4; k++)
+                if (players[currentPlayer].hasWon)
                 {
-                    if (players[k].hasWon)
-                        players[k].maxCards--;
-                    players[k].hasWon = false;
-                    if (players[k].maxCards == 0)
-                        players[k].ULTIMATE_VICTOR = true;
+                    for (int k = 0; k < 4; k++)
+                    {
+                        if (players[k].hasWon)
+                            players[k].maxCards--;
+                        players[k].hasWon = false;
+                        if (players[k].maxCards == 0)
+                            players[k].ULTIMATE_VICTOR = true;
+                    }
+                    InitializeGame(game);
                 }
-                InitializeGame(game);
+                else
+                    players[currentPlayer].Update(game, time, this);
             }
-            else
-                players[currentPlayer].Update(game, time, this);
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
@@ -138,9 +142,11 @@ namespace CS206Project
             for(int k = 0; k < 4; k++)
                 if(players[k].ULTIMATE_VICTOR)
                 {
-                    game.spriteBatch.DrawString(font, players[k].name, new Vector2(ULTIMATE_VICTOR_LOCATION.X, ULTIMATE_VICTOR_LOCATION.Y), Color.White);
+                    ULTIMATE_VICTOR_DETERMINED = true;
+                    game.spriteBatch.DrawString(font, players[k].name + "\nWINS", new Vector2(ULTIMATE_VICTOR_LOCATION.X, ULTIMATE_VICTOR_LOCATION.Y), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
                     k = 4;
                 }
+
             return true;
         }
 

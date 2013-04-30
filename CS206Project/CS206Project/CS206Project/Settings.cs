@@ -18,7 +18,7 @@ namespace CS206Project
 
         public bool Initialize()
         {
-            numCards = 8;
+            numCards = 2;
             maxPlayers = 4;
             return true;
         }
@@ -33,7 +33,7 @@ namespace CS206Project
 
         public Settings()
         {
-            numCards = 8;
+            numCards = 2;
             maxPlayers = 4;
             playerName = "Ladeda";
         }
