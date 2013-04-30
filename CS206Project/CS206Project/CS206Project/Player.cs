@@ -14,6 +14,8 @@ namespace CS206Project
         private bool validPlays;                        // true if the player can play the card in their hand, false if they must discard or bury
         private Card hand;                              // card the player is currently holding during their turn
         private bool hasDrawn;
+        MouseState previousState;
+        private bool drewOrPlayed;
 
         //default constructor
 
@@ -29,6 +31,8 @@ namespace CS206Project
         public void turn(GameScreen gamescreen)
         {
             validPlays = true;
+            drewOrPlayed = false;
+
             if (!hasDrawn)
             {
                 drawCard(Mouse.GetState(), gamescreen);
@@ -37,13 +41,14 @@ namespace CS206Project
             {
                 playCard(Mouse.GetState(), gamescreen);
             }
-            else if (!playCheck())
+
+            if (!drewOrPlayed)
             {
                 if (discardCard(Mouse.GetState(), gamescreen))
                 {
                     hasDrawn = false;
                     hasWon = true;
-                    for (int i = 0; i < maxCards; i++)
+                     for (int i = 0; i < maxCards; i++)
                     {
                         if (!field[i].isVisible())
                             hasWon = false;
@@ -51,31 +56,34 @@ namespace CS206Project
                     gamescreen.currentPlayer = 1;
                 }
             }
-
         }
 
         public void drawCard(MouseState clickLocation, GameScreen gamescreen)
         {
-            if (clickLocation.LeftButton == ButtonState.Pressed)
+            if ((clickLocation.LeftButton == ButtonState.Pressed) && (clickLocation != previousState))
             {
                 if (gamescreen.deck_location.Contains(clickLocation.X, clickLocation.Y))
                 {
                     hand = gamescreen.deck_pop();
                     hand.show();
                     hasDrawn = true;
+                    drewOrPlayed = true;
+
                 }
                 else if (gamescreen.discard_location.Contains(clickLocation.X, clickLocation.Y))
                 {
                     hand = gamescreen.discardPile_pop();
                     hasDrawn = true;
+                    drewOrPlayed = true;
                 }
             }
+            previousState = clickLocation;
             return;
         }
 
         public void playCard(MouseState clickLocation, GameScreen gamescreen)
     {
-        if (clickLocation.LeftButton == ButtonState.Pressed)
+        if ((clickLocation.LeftButton == ButtonState.Pressed) && (clickLocation != previousState))
         {
             for (int i = 0; i < maxCards; i++)
             {
@@ -91,6 +99,7 @@ namespace CS206Project
                             hand = temp;
                             hand.show();
                             i = maxCards + 1;
+                            drewOrPlayed = true;
                         }
                         else if (field[i].isVisible() && (field[i].getNumber() == Game1.JACK))
                         {
@@ -100,12 +109,24 @@ namespace CS206Project
                             hand = temp;
                             hand.show();
                             i = maxCards + 1;
+                            drewOrPlayed = true;
                         }
+                        else if (field[i].isVisible() && hand.getNumber() == Game1.JACK)
+                        {
+                            Card temp = field[i];
+                            field[i] = hand;
+                            field[i].show();
+                            hand = temp;
+                            hand.show();
+                            i = maxCards + 1;
+                            drewOrPlayed = true;
+                        }
+
                     }
                 }
             }
         }
-
+        previousState = clickLocation;
 	  return;
     }
 
@@ -113,7 +134,7 @@ namespace CS206Project
         {
             bool hasDiscarded = false;
 
-            if (clickLocation.LeftButton == ButtonState.Pressed)
+            if ((clickLocation.LeftButton == ButtonState.Pressed) && (clickLocation != previousState))
             {
 
                 if (gamescreen.discard_location.Contains(clickLocation.X, clickLocation.Y))
@@ -134,6 +155,7 @@ namespace CS206Project
                     }
                 }
             }
+            previousState = clickLocation;
             return hasDiscarded;
         }
         public bool buryCard(int i, GameScreen gamescreen)

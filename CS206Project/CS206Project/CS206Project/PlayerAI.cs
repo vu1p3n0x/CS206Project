@@ -7,7 +7,6 @@ namespace CS206Project
 {
     class PlayerAI : PlayerBase
     {
-        private bool validPlays;
         private bool hasDrawn;
         private Card hand;
 
