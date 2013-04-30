@@ -65,11 +65,11 @@ namespace CS206Project
 
             // draw options button
             game.spriteBatch.Draw(pixel, optionsButton, Color.White);
-            game.spriteBatch.DrawString(font, "OPTIONS", new Vector2(optionsButton.X+5.0f, optionsButton.Y+10.0f), Color.Black);
+            game.spriteBatch.DrawString(font, "OPTIONS", new Vector2(optionsButton.X+10.0f, optionsButton.Y+10.0f), Color.Black);
 
             // draw game button
             game.spriteBatch.Draw(pixel, gameButton, Color.White);
-            game.spriteBatch.DrawString(font, "START", new Vector2(gameButton.X + 5.0f, gameButton.Y + 10.0f), Color.Black);
+            game.spriteBatch.DrawString(font, "START", new Vector2(gameButton.X + 10.0f, gameButton.Y + 10.0f), Color.Black);
 
 
             return true;
@@ -81,6 +81,9 @@ namespace CS206Project
         }
         public override Screen GetNextScreen()
         {
+            options_pressed = false;
+            game_pressed = false;
+
             if (options_pressed)
                 // change to OptionsScreen when created
                 return new OptionScreen();
