@@ -83,7 +83,7 @@ namespace CS206Project
         {
             if (options_pressed)
                 // change to OptionsScreen when created
-                return new GameScreen();
+                return new OptionScreen();
             else if (game_pressed)
                 return new GameScreen();
             else
