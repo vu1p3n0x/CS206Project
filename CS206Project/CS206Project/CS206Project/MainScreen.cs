@@ -81,16 +81,20 @@ namespace CS206Project
         }
         public override Screen GetNextScreen()
         {
-            options_pressed = false;
-            game_pressed = false;
+            Screen screen;
 
             if (options_pressed)
                 // change to OptionsScreen when created
-                return new OptionScreen();
+                screen = new OptionScreen();
             else if (game_pressed)
-                return new GameScreen();
+                screen = new GameScreen();
             else
-                return new ScreenEmpty();
+                screen = new ScreenEmpty();
+
+            options_pressed = false;
+            game_pressed = false;
+
+            return screen;
         }
     }
 }
