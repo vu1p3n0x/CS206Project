@@ -20,6 +20,7 @@ namespace CS206Project
 
         public SpriteFont font;
         // constructor and destructor
+
         public Settings()
         {
             // set default values
@@ -32,14 +33,12 @@ namespace CS206Project
 
         }
 
-        // basic functions
         public bool Initialize()
         {
             // set default values
             numCards = 8;
             maxPlayers = 4;
             playerName = "N/A";
-
             return true;
         }
         public bool LoadContent(Game1 game)
@@ -54,6 +53,7 @@ namespace CS206Project
 
             return true;
         }
+
         // accessor functions
         public int getNumCards()
         {
