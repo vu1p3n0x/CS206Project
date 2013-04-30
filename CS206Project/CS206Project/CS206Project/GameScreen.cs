@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace CS206Project
 {
@@ -20,6 +21,7 @@ namespace CS206Project
         public Rectangle deck_location;
         public Rectangle discard_location;
         Rectangle ULTIMATE_VICTOR_LOCATION;
+        MouseState mousestate;
 
         public List<PlayerBase> players = new List<PlayerBase>();
         public int currentPlayer;
@@ -103,6 +105,12 @@ namespace CS206Project
                 }
                 else
                     players[currentPlayer].Update(game, time, this);
+            }
+            else
+            {
+                mousestate = Mouse.GetState();
+                if (mousestate.LeftButton == ButtonState.Pressed)
+                    this.Remove();
             }
             return true;
         }
