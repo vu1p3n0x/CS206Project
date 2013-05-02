@@ -18,6 +18,8 @@ namespace CS206Project
         Rectangle gameButton;
         Rectangle background;
 
+        MouseState prevState;
+
         bool options_pressed;
         bool game_pressed;
 
@@ -31,6 +33,8 @@ namespace CS206Project
             // initialize boolean variables
             options_pressed = false;
             game_pressed = false;
+
+            prevState = new MouseState();
 
             return true;
         }
@@ -48,13 +52,16 @@ namespace CS206Project
             MouseState mouseState = Mouse.GetState();
 
             // check if pressed on button
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            if (mouseState.LeftButton == ButtonState.Pressed && prevState.LeftButton == ButtonState.Released)
             {
                 if (optionsButton.Contains(mouseState.X, mouseState.Y))
                     options_pressed = true;
                 else if (gameButton.Contains(mouseState.X, mouseState.Y))
                     game_pressed = true;
             }
+
+            // set next iteration previous value
+            prevState = mouseState;
 
             return true;
         }
