@@ -10,13 +10,8 @@ namespace CS206Project
 {
     class MainScreen : Screen
     {
-        Texture2D pixel;
-        SpriteFont font;
-        Texture2D table;
-
         Rectangle optionsButton;
         Rectangle gameButton;
-        Rectangle background;
 
         MouseState prevState;
 
@@ -28,7 +23,6 @@ namespace CS206Project
             // set button sizes
             optionsButton = new Rectangle(5, 5, 100, 40);
             gameButton = new Rectangle(110, 5, 100, 40);
-            background = new Rectangle(0, 0, 780, 600);
 
             // initialize boolean variables
             options_pressed = false;
@@ -40,10 +34,6 @@ namespace CS206Project
         }
         public override bool LoadContent(Game1 game)
         {
-            // load in graphics content
-            pixel = game.Content.Load<Texture2D>("pixel");
-            font = game.Content.Load<SpriteFont>("mainfont");
-            table = game.Content.Load<Texture2D>("Table_top copy");
             return true;
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
@@ -68,16 +58,15 @@ namespace CS206Project
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
             // draw background
-            game.spriteBatch.Draw(table, background, Color.White);
+            game.spriteBatch.Draw(game.settings.table, game.settings.background, Color.White);
 
             // draw options button
-            game.spriteBatch.Draw(pixel, optionsButton, Color.White);
-            game.spriteBatch.DrawString(font, "OPTIONS", new Vector2(optionsButton.X+10.0f, optionsButton.Y+10.0f), Color.Black);
+            game.spriteBatch.Draw(game.settings.pixel, optionsButton, Color.White);
+            game.spriteBatch.DrawString(game.settings.font, "OPTIONS", new Vector2(optionsButton.X + 10.0f, optionsButton.Y + 10.0f), Color.Black);
 
             // draw game button
-            game.spriteBatch.Draw(pixel, gameButton, Color.White);
-            game.spriteBatch.DrawString(font, "START", new Vector2(gameButton.X + 10.0f, gameButton.Y + 10.0f), Color.Black);
-
+            game.spriteBatch.Draw(game.settings.pixel, gameButton, Color.White);
+            game.spriteBatch.DrawString(game.settings.font, "START", new Vector2(gameButton.X + 10.0f, gameButton.Y + 10.0f), Color.Black);
 
             return true;
         }
@@ -91,7 +80,6 @@ namespace CS206Project
             Screen screen;
 
             if (options_pressed)
-                // change to OptionsScreen when created
                 screen = new OptionScreen();
             else if (game_pressed)
                 screen = new GameScreen();
