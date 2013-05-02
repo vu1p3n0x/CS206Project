@@ -19,7 +19,7 @@ namespace CS206Project
         {
             number = newNumber;
             suit = newSuit;
-            visible = false;//defaults to false
+            visible = false;
         }
         ~Card()
         {

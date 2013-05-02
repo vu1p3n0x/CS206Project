@@ -11,9 +11,6 @@ using Microsoft.Xna.Framework.Media;
 
 namespace CS206Project
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         public GraphicsDeviceManager graphics;
@@ -23,71 +20,54 @@ namespace CS206Project
         public static int QUEEN = 12;
         public static int KING = 13;
 
-        Texture2D texturetest;
-        //SpriteFont MainFont;
         Stack<Screen> screens;
 
         public Game1()
         {
+            // program-wide settings
             IsMouseVisible = true;
-            graphics = new GraphicsDeviceManager(this);
             IsFixedTimeStep = false;
 
+            // set graphics
+            graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 780;
 
+            // set content directory
             Content.RootDirectory = "Content";
 
+            // create screen stack
             screens = new Stack<Screen>();
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
+            // create settings object
             settings = new Settings();
             settings.Initialize();
 
+            // set main screen on screen stack
             screens.Push(new MainScreen()); 
             screens.Peek().Initialize(this);
 
             base.Initialize();
         }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            texturetest = Content.Load<Texture2D>("Table_top copy");
+            // have settings and main screen load content
             settings.LoadContent(this);
             screens.Peek().LoadContent(this);
 
             // TODO: use this.Content to load your game content here
         }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             // if screen requests to be removed, then remove it
@@ -134,17 +114,11 @@ namespace CS206Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            // initialize drawing
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
@@ -158,6 +132,7 @@ namespace CS206Project
                     this.Exit();
             }
 
+            // stop drawing
             spriteBatch.End();
             base.Draw(gameTime);
         }
