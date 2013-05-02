@@ -60,7 +60,7 @@ namespace CS206Project
 
         public void drawCard(MouseState clickLocation, GameScreen gamescreen)
         {
-            if ((clickLocation.LeftButton == ButtonState.Pressed) && (clickLocation != previousState))
+            if ((clickLocation.LeftButton == ButtonState.Pressed) && (previousState.LeftButton != ButtonState.Pressed))
             {
                 if (gamescreen.deck_location.Contains(clickLocation.X, clickLocation.Y))
                 {
@@ -83,7 +83,7 @@ namespace CS206Project
 
         public void playCard(MouseState clickLocation, GameScreen gamescreen)
     {
-        if ((clickLocation.LeftButton == ButtonState.Pressed) && (clickLocation != previousState))
+        if ((clickLocation.LeftButton == ButtonState.Pressed) && (previousState.LeftButton != ButtonState.Pressed))
         {
             for (int i = 0; i < maxCards; i++)
             {
@@ -134,7 +134,7 @@ namespace CS206Project
         {
             bool hasDiscarded = false;
 
-            if ((clickLocation.LeftButton == ButtonState.Pressed) && (clickLocation != previousState))
+            if ((clickLocation.LeftButton == ButtonState.Pressed) && (previousState.LeftButton != ButtonState.Pressed))
             {
 
                 if (gamescreen.discard_location.Contains(clickLocation.X, clickLocation.Y))

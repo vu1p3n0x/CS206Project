@@ -85,13 +85,21 @@ namespace CS206Project
             {
                 if (players[currentPlayer].hasWon)
                 {
+                    if (players[currentPlayer].maxCards == 1)
+                    {
+                        players[currentPlayer].ULTIMATE_VICTOR = true;
+                        ULTIMATE_VICTOR_DETERMINED = true;
+                    }
                     for (int k = 0; k < 4; k++)
                     {
                         if (players[k].hasWon)
                             players[k].maxCards--;
                         players[k].hasWon = false;
-                        if (players[k].maxCards == 0)
+                        if (players[k].maxCards == 0 && !ULTIMATE_VICTOR_DETERMINED)
+                        {
                             players[k].ULTIMATE_VICTOR = true;
+                            ULTIMATE_VICTOR_DETERMINED = true;
+                        }
                     }
                     InitializeGame(game);
                 }
