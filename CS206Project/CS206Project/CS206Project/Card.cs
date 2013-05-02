@@ -9,12 +9,24 @@ namespace CS206Project
 {
     class Card
     {
-        const int width = 933 / 13;//71.76 roughtly the width of each card
-        const int height = 499 / 5;//100 roughly the height of each card
+        // member variables
         int number;
-        int suit; //Spade = 1; Club = 2; Heart = 3; Diamond = 4
+        int suit;           //Spade = 1; Club = 2; Heart = 3; Diamond = 4
         bool visible;
 
+        // constructor and destructor
+        public Card(int newNumber, int newSuit)
+        {
+            number = newNumber;
+            suit = newSuit;
+            visible = false;//defaults to false
+        }
+        ~Card()
+        {
+
+        }
+
+        // basic functions
         public bool Initialize(Game1 game, int newNumber, int newSuit)
         {
             number = newNumber;
@@ -35,13 +47,7 @@ namespace CS206Project
             game.spriteBatch.Draw(game.settings.images, dest, src, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 1.0f);
         }
 
-        public Card(int newNumber, int newSuit)
-        {
-            number = newNumber;
-            suit = newSuit;
-            visible = false;//defaults to false
-        }
-
+        // accessor functions
         public int getNumber()
         {
             return number;
@@ -51,6 +57,7 @@ namespace CS206Project
             return suit;
         }
 
+        // visibility functions
         public bool isVisible()
         {
             return visible;
@@ -64,6 +71,7 @@ namespace CS206Project
             visible = false;
         }
 
+        // boolean operators
         public static bool operator== (Card lhs, Card rhs)
         {
             if (rhs.number == lhs.number && rhs.suit == lhs.suit)
@@ -76,6 +84,7 @@ namespace CS206Project
             return !(lhs == rhs);
         }
 
+        // static member
         public static readonly Card Blank = new Card(0, 0);
     }
 }
