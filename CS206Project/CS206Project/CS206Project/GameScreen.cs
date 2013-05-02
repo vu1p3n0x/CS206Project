@@ -119,22 +119,12 @@ namespace CS206Project
             //Draws background
             game.spriteBatch.Draw(game.settings.table, game.settings.background, Color.White);
 
-            //Draws player 0's (user) field
-            for (int i = 0; i < players[0].maxCards; i++)
-                players[0].field[i].Draw(game, fields[0, i]);
-
-            //Draws player 1's field
-            for (int i = 0; i < players[1].maxCards; i++)
-                players[1].field[i].Draw(game, fields[1, i], 1.57f);
-
-            //Draws player 2's field
-            for (int i = 0; i < players[2].maxCards; i++)
-                players[2].field[i].Draw(game, fields[2, i]);
-
-            //Draws player 3's field
-            for (int i = 0; i < players[3].maxCards; i++)
-                players[3].field[i].Draw(game, fields[3, i], 1.57f);
-
+            for (int j = 0; j < game.settings.getMaxPlayers(); j++)
+                for (int i = 0; i < players[j].maxCards; i++)
+                    if (j == 1 || j == 3)
+                        players[j].field[i].Draw(game, fields[j, i], 1.57f);
+                    else
+                        players[j].field[i].Draw(game, fields[j, i]);
 
             // draw deck pile
             deck[0].Draw(game, deck_location);
@@ -166,18 +156,15 @@ namespace CS206Project
         {
             return new ScreenEmpty();
         }
-        public void deal()
+        public void deal(Game1 game)
         {
             for (int i = 0; i < 8; i++)
             {
-                if (i < players[0].maxCards)
-                    players[0].field.Add(deck_pop());
-                if (i < players[1].maxCards)
-                    players[1].field.Add(deck_pop());
-                if (i < players[2].maxCards)
-                    players[2].field.Add(deck_pop());
-                if (i < players[3].maxCards)
-                    players[3].field.Add(deck_pop());
+                for (int j = 0; j < game.settings.getMaxPlayers(); j++)
+                {
+                    if (i < players[j].maxCards)
+                        players[j].field.Add(deck_pop());
+                }
             }
 
             discardPile_push(deck_pop());
@@ -257,7 +244,7 @@ namespace CS206Project
                 for (int j = 1; j <= Game1.KING; j++)
                     deck.Add(new Card(j, i));
             deck = shuffle(deck);
-            deal();
+            deal(game);
             return;
         }
     }

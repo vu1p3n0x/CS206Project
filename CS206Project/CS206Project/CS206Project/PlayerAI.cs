@@ -50,7 +50,7 @@ namespace CS206Project
             else
             {
                 // Discard when there are no more plays
-                discardCard(gamescreen);
+                discardCard(game, gamescreen);
                 hasDrawn = false;
                 hasWon = true;
 
@@ -60,7 +60,7 @@ namespace CS206Project
                         hasWon = false;
                 }
                 gamescreen.currentPlayer++;
-                if (gamescreen.currentPlayer == 4)
+                if (gamescreen.currentPlayer == game.settings.getMaxPlayers())
                     gamescreen.currentPlayer = 0;
             }
             System.Threading.Thread.Sleep(250);
@@ -115,14 +115,15 @@ namespace CS206Project
                 }
             }
         }
-        public bool discardCard(GameScreen gamescreen)
+        public bool discardCard(Game1 game, GameScreen gamescreen)
         {
             int nextPlayer;
             bool hasDiscarded = false;
-            if (gamescreen.currentPlayer == 3)
+
+            nextPlayer = gamescreen.currentPlayer + 1;
+            if (nextPlayer == game.settings.getMaxPlayers())
                 nextPlayer = 0;
-            else
-                nextPlayer = gamescreen.currentPlayer + 1;
+
             if (hand.getNumber() > gamescreen.players[nextPlayer].maxCards)
             {
                 gamescreen.discardPile_push(hand);

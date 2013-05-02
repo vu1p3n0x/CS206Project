@@ -119,7 +119,7 @@ namespace CS206Project
         protected override void Draw(GameTime gameTime)
         {
             // initialize drawing
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
 
             // exit the program if there are no screens

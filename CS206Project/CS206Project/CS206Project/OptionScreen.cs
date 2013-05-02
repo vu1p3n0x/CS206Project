@@ -56,6 +56,12 @@ namespace CS206Project
                         {
                             game.settings.setNumCards(i + 1);
                         }
+
+                    for (int i = 0; i < 4; i++)
+                        if (new Rectangle(45 + 40 * i, 340, 30, 30).Contains(state.X, state.Y))
+                        {
+                            game.settings.setMaxPlayers(i + 1);
+                        }
                 }
             }
 
@@ -67,14 +73,14 @@ namespace CS206Project
             Card temp;
 
             // draw background
-            game.spriteBatch.Draw(game.settings.table, game.settings.background, Color.White);
+            game.spriteBatch.Draw(game.settings.table, game.settings.background, new Color(255, 255, 255, 220));
 
             // draw back button
             game.spriteBatch.Draw(game.settings.pixel, backButton, Color.White);
             game.spriteBatch.DrawString(game.settings.font, "BACK", new Vector2(backButton.X + 10.0f, backButton.Y + 10.0f), Color.Black);
 
             // draw max card options
-            game.spriteBatch.DrawString(game.settings.font, "Choose the number of cards", new Vector2(50, 100), Color.White);
+            game.spriteBatch.DrawString(game.settings.font, "Choose the number of cards", new Vector2(50, 100), Color.Black);
             for (int i = 0; i < 8; i++)
             {
                 game.spriteBatch.Draw(game.settings.pixel, new Rectangle(45 + 40 * i, 130, 30, 30), Color.Black);
@@ -85,9 +91,8 @@ namespace CS206Project
                 game.spriteBatch.DrawString(game.settings.font, (i + 1).ToString(), new Vector2(54+40*i, 132), Color.Black);
             }
 
-
             // draw card background options
-            game.spriteBatch.DrawString(game.settings.font, "Choose a card background", new Vector2(50, 165), Color.White);
+            game.spriteBatch.DrawString(game.settings.font, "Choose a card background", new Vector2(50, 165), Color.Black);
             for (int i = 0; i < 4; i++)
             {
                 temp = new Card(4+i, 5);
@@ -98,6 +103,18 @@ namespace CS206Project
                     game.spriteBatch.Draw(game.settings.pixel, new Rectangle(85 * i + 48, 198, 76, 104), Color.Green);
                 }
                 temp.Draw(game, new Rectangle(85 * i + 50, 200, 72, 100));
+            }
+
+            // draw max player options
+            game.spriteBatch.DrawString(game.settings.font, "Choose the number of players", new Vector2(50, 310), Color.Black);
+            for (int i = 0; i < 4; i++)
+            {
+                game.spriteBatch.Draw(game.settings.pixel, new Rectangle(45 + 40 * i, 340, 30, 30), Color.Black);
+                if (game.settings.getMaxPlayers() == i + 1)
+                    game.spriteBatch.Draw(game.settings.pixel, new Rectangle(48 + 40 * i, 343, 24, 24), Color.Green);
+                else
+                    game.spriteBatch.Draw(game.settings.pixel, new Rectangle(48 + 40 * i, 343, 24, 24), Color.White);
+                game.spriteBatch.DrawString(game.settings.font, (i + 1).ToString(), new Vector2(54 + 40 * i, 342), Color.Black);
             }
 
             return true;
