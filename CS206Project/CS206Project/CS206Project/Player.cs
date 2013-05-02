@@ -28,7 +28,7 @@ namespace CS206Project
         }
           // adds a card to the field, for use in deal function
 
-        public void turn(GameScreen gamescreen)
+        public void turn(Game1 game, GameScreen gamescreen)
         {
             validPlays = true;
             drewOrPlayed = false;
@@ -48,12 +48,13 @@ namespace CS206Project
                 {
                     hasDrawn = false;
                     hasWon = true;
-                     for (int i = 0; i < maxCards; i++)
+                    for (int i = 0; i < maxCards; i++)
                     {
                         if (!field[i].isVisible())
                             hasWon = false;
                     }
-                    gamescreen.currentPlayer = 1;
+                    if (game.settings.getMaxPlayers() > 1)
+                        gamescreen.currentPlayer = 1;
                 }
             }
         }
@@ -225,7 +226,7 @@ namespace CS206Project
         public override bool Update(Game1 game, GameTime time, GameScreen gamescreen)
         {
             if (gamescreen.currentPlayer == 0)
-                turn(gamescreen);
+                turn(game, gamescreen);
             return true;
         }
 
