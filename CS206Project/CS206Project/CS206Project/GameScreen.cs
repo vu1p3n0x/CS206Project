@@ -13,10 +13,6 @@ namespace CS206Project
         public List<Card> deck = new List<Card>();
         public List<Card> discardPile = new List<Card>();
 
-        Texture2D table;
-        Texture2D pixel;
-        Rectangle background;
-        SpriteFont font;
         public Rectangle[,] fields;
         public Rectangle deck_location;
         public Rectangle discard_location;
@@ -70,21 +66,17 @@ namespace CS206Project
 
             deck_location = new Rectangle(325, 250, 70, 100);
             discard_location = new Rectangle(400, 250, 70, 100);
-            background = new Rectangle(0, 0, 780, 600);
 
             players.Add(new Player(game, this, game.settings.getPlayerName()));
             players.Add(new PlayerAI(game, this, "Bob"));
             players.Add(new PlayerAI(game, this, "Tom"));
             players.Add(new PlayerAI(game, this, "Jerry"));
-            font = game.Content.Load<SpriteFont>("mainfont");
 
             InitializeGame(game);
             return true;
         }
         public override bool LoadContent(Game1 game)
         {
-            table = game.Content.Load<Texture2D>("Table_top copy");
-            pixel = game.Content.Load<Texture2D>("pixel");
             return true;
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
@@ -117,7 +109,7 @@ namespace CS206Project
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
             //Draws background
-            game.spriteBatch.Draw(table,background,Color.White);
+            game.spriteBatch.Draw(game.settings.table, game.settings.background, Color.White);
 
             //Draws player 0's (user) field
             for (int i = 0; i < players[0].maxCards; i++)
@@ -151,7 +143,7 @@ namespace CS206Project
                 if(players[k].ULTIMATE_VICTOR)
                 {
                     ULTIMATE_VICTOR_DETERMINED = true;
-                    game.spriteBatch.DrawString(font, players[k].name + "\nWINS", new Vector2(ULTIMATE_VICTOR_LOCATION.X, ULTIMATE_VICTOR_LOCATION.Y), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
+                    game.spriteBatch.DrawString(game.settings.font, players[k].name + "\nWINS", new Vector2(ULTIMATE_VICTOR_LOCATION.X, ULTIMATE_VICTOR_LOCATION.Y), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
                     k = 4;
                 }
 
