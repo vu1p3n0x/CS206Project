@@ -49,15 +49,23 @@ namespace CS206Project
                     for (int i = 0; i < 4; i++)
                         if (new Rectangle(85 * i + 45, 195, 82, 110).Contains(state.X, state.Y))
                             game.settings.currentBack = i;
+
+                    // check for number of card clicks
+                    for (int i = 0; i < 8; i++)
+                        if (new Rectangle(45 + 40 * i, 130, 30, 30).Contains(state.X, state.Y))
+                        {
+                            game.settings.setNumCards(i + 1);
+                        }
                 }
             }
 
             prevState = state;
-
             return true;
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
+            Card temp;
+
             // draw background
             game.spriteBatch.Draw(game.settings.table, game.settings.background, Color.White);
 
@@ -65,13 +73,30 @@ namespace CS206Project
             game.spriteBatch.Draw(game.settings.pixel, backButton, Color.White);
             game.spriteBatch.DrawString(game.settings.font, "BACK", new Vector2(backButton.X + 10.0f, backButton.Y + 10.0f), Color.Black);
 
-            Card temp;
+            // draw max card options
+            game.spriteBatch.DrawString(game.settings.font, "Choose the number of cards", new Vector2(50, 100), Color.White);
+            for (int i = 0; i < 8; i++)
+            {
+                game.spriteBatch.Draw(game.settings.pixel, new Rectangle(45 + 40 * i, 130, 30, 30), Color.Black);
+                if (game.settings.getNumCards() == i + 1)
+                    game.spriteBatch.Draw(game.settings.pixel, new Rectangle(48 + 40 * i, 133, 24, 24), Color.Green);
+                else
+                    game.spriteBatch.Draw(game.settings.pixel, new Rectangle(48 + 40 * i, 133, 24, 24), Color.White);
+                game.spriteBatch.DrawString(game.settings.font, (i + 1).ToString(), new Vector2(54+40*i, 132), Color.Black);
+            }
+
+
+            // draw card background options
+            game.spriteBatch.DrawString(game.settings.font, "Choose a card background", new Vector2(50, 165), Color.White);
             for (int i = 0; i < 4; i++)
             {
                 temp = new Card(4+i, 5);
                 temp.show();
                 if (i == game.settings.currentBack)
-                    game.spriteBatch.Draw(game.settings.pixel, new Rectangle(85 * i + 45, 195, 82, 110), Color.Green);
+                {
+                    game.spriteBatch.Draw(game.settings.pixel, new Rectangle(85 * i + 45, 195, 82, 110), Color.Black);
+                    game.spriteBatch.Draw(game.settings.pixel, new Rectangle(85 * i + 48, 198, 76, 104), Color.Green);
+                }
                 temp.Draw(game, new Rectangle(85 * i + 50, 200, 72, 100));
             }
 
