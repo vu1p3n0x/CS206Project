@@ -14,9 +14,13 @@ namespace CS206Project
         int maxPlayers;
         string playerName;
 
+        public Rectangle background;
+
         public Texture2D images;
         public Texture2D table;
         public Texture2D pixel;
+
+        public int currentBack;
 
         public SpriteFont font;
         // constructor and destructor
@@ -27,6 +31,7 @@ namespace CS206Project
             numCards = 8;
             maxPlayers = 4;
             playerName = "Ladeda";
+            currentBack = 2;
         }
         ~Settings()
         {
@@ -38,7 +43,11 @@ namespace CS206Project
             // set default values
             numCards = 8;
             maxPlayers = 4;
-            playerName = "N/A";
+            playerName = "ladeda";
+            currentBack = 2;
+
+            background = new Rectangle(0, 0, 780, 600);
+
             return true;
         }
         public bool LoadContent(Game1 game)

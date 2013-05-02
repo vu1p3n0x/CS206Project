@@ -30,7 +30,7 @@ namespace CS206Project
             else if (number == 0 || suit == 0)
                 src = new Rectangle(game.settings.images.Width / 13 * (1), game.settings.images.Height / 5 * (4), game.settings.images.Width / 13, game.settings.images.Height / 5);
             else
-                src = new Rectangle(game.settings.images.Width / 13 * (5), game.settings.images.Height / 5 * (4), game.settings.images.Width / 13, game.settings.images.Height / 5);
+                src = new Rectangle(game.settings.images.Width / 13 * (3 + game.settings.currentBack), game.settings.images.Height / 5 * (4), game.settings.images.Width / 13, game.settings.images.Height / 5);
 
             game.spriteBatch.Draw(game.settings.images, dest, src, Color.White, rotation, Vector2.Zero, SpriteEffects.None, 1.0f);
         }

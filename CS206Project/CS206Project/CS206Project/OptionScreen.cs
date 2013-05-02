@@ -43,6 +43,13 @@ namespace CS206Project
             {
                 if (backButton.Contains(state.X, state.Y))
                     Remove();
+                else
+                {
+                    // check for card background clicks
+                    for (int i = 0; i < 4; i++)
+                        if (new Rectangle(85 * i + 45, 195, 82, 110).Contains(state.X, state.Y))
+                            game.settings.currentBack = i;
+                }
             }
 
             prevState = state;
@@ -51,9 +58,22 @@ namespace CS206Project
         }
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
+            // draw background
+            game.spriteBatch.Draw(game.settings.table, game.settings.background, Color.White);
+
             // draw back button
             game.spriteBatch.Draw(game.settings.pixel, backButton, Color.White);
             game.spriteBatch.DrawString(game.settings.font, "BACK", new Vector2(backButton.X + 10.0f, backButton.Y + 10.0f), Color.Black);
+
+            Card temp;
+            for (int i = 0; i < 4; i++)
+            {
+                temp = new Card(4+i, 5);
+                temp.show();
+                if (i == game.settings.currentBack)
+                    game.spriteBatch.Draw(game.settings.pixel, new Rectangle(85 * i + 45, 195, 82, 110), Color.Green);
+                temp.Draw(game, new Rectangle(85 * i + 50, 200, 72, 100));
+            }
 
             return true;
         }
