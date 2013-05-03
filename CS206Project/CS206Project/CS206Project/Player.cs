@@ -15,7 +15,8 @@ namespace CS206Project
         private Card hand;                              // card the player is currently holding during their turn
         private bool hasDrawn;
         private bool drewOrPlayed;
-
+        private MouseState mouseState;
+        int location;
         //default constructor
 
         public Player(Game1 game, GameScreen gamescreen, string newName)
@@ -36,25 +37,57 @@ namespace CS206Project
             {
                 drawCard(Mouse.GetState(), gamescreen);
             }
-            else if (playCheck())
+            else
             {
-                playCard(Mouse.GetState(), gamescreen);
-            }
-
-            if (!drewOrPlayed)
-            {
-                if (discardCard(Mouse.GetState(), gamescreen))
+                location = -1;
+                mouseState = Mouse.GetState();
+                if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    hasDrawn = false;
-                    hasWon = true;
                     for (int i = 0; i < maxCards; i++)
                     {
-                        if (!field[i].isVisible())
-                            hasWon = false;
+                        if (gamescreen.fields[0, i].Contains(mouseState.X, mouseState.Y))
+                        {
+                            location = i;
+                            i = maxCards;
+                        }
                     }
-                    if (game.settings.getMaxPlayers() > 1)
-                        gamescreen.currentPlayer = 1;
+                    if (location == -1)
+                    {
+                        if (gamescreen.discard_location.Contains(mouseState.X, mouseState.Y))
+                        {
+                            if (discardCard(mouseState, gamescreen))
+                            {
+                                hasDrawn = false;
+                                hasWon = true;
+                                for (int i = 0; i < maxCards; i++)
+                                {
+                                    if (!field[i].isVisible())
+                                        hasWon = false;
+                                }
+                                if (game.settings.getMaxPlayers() > 1)
+                                    gamescreen.currentPlayer = 1;
+
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (hand.getNumber() == Game1.JACK || hand.getNumber() - 1 == location)
+                            playCard(mouseState, gamescreen);
+                        else
+                        {
+                            if (buryCard(location, gamescreen))
+                            {
+                                hasDrawn = false;
+                                if (game.settings.getMaxPlayers() > 1)
+                                    gamescreen.currentPlayer = 1;
+                            }
+                        }
+                    }
                 }
+
+                previousState = mouseState;
             }
         }
 
@@ -91,8 +124,6 @@ namespace CS206Project
                 {
                     if ((hand.getNumber() == (i+1)) || (hand.getNumber() == Game1.JACK))
                     {
-                        if (!field[i].isVisible())
-                        {
                             Card temp = field[i];
                             field[i] = hand;
                             field[i].show();
@@ -100,27 +131,7 @@ namespace CS206Project
                             hand.show();
                             i = maxCards + 1;
                             drewOrPlayed = true;
-                        }
-                        else if (field[i].isVisible() && (field[i].getNumber() == Game1.JACK))
-                        {
-                            Card temp = field[i];
-                            field[i] = hand;
-                            field[i].show();
-                            hand = temp;
-                            hand.show();
-                            i = maxCards + 1;
-                            drewOrPlayed = true;
-                        }
-                        else if (field[i].isVisible() && hand.getNumber() == Game1.JACK)
-                        {
-                            Card temp = field[i];
-                            field[i] = hand;
-                            field[i].show();
-                            hand = temp;
-                            hand.show();
-                            i = maxCards + 1;
-                            drewOrPlayed = true;
-                        }
+
 
                     }
                 }
@@ -143,17 +154,7 @@ namespace CS206Project
                     hand = Card.Blank;
                     hasDiscarded = true;
                 }
-                else
-                {
-                    for (int i = 0; i < maxCards; i++)
-                    {
-                        if (gamescreen.fields[0, i].Contains(clickLocation.X, clickLocation.Y))
-                        {
-                            hasDiscarded = buryCard(i, gamescreen);
-                            i = maxCards + 1;
-                        }
-                    }
-                }
+                
             }
             previousState = clickLocation;
             return hasDiscarded;
