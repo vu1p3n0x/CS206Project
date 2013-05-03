@@ -18,10 +18,11 @@ namespace CS206Project
         public Rectangle discard_location;
         Rectangle ULTIMATE_VICTOR_LOCATION;
         MouseState mousestate;
-
+        MouseState previousState;
         public List<PlayerBase> players = new List<PlayerBase>();
         public int currentPlayer;
         bool ULTIMATE_VICTOR_DETERMINED = false;
+        bool previousStateSet = false;
 
         public override bool Initialize(Game1 game)
         {
@@ -81,6 +82,13 @@ namespace CS206Project
         }
         public override bool Update(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
+           
+            if (mousestate.LeftButton == ButtonState.Pressed && !previousStateSet)
+            {
+                previousState = mousestate;
+                previousStateSet = true;
+            }
+
             if (ULTIMATE_VICTOR_DETERMINED == false)
             {
                 if (players[currentPlayer].hasWon)
@@ -109,8 +117,9 @@ namespace CS206Project
             else
             {
                 mousestate = Mouse.GetState();
-                if (mousestate.LeftButton == ButtonState.Pressed)
+                if (mousestate.LeftButton == ButtonState.Pressed && previousState.LeftButton != ButtonState.Pressed)
                     this.Remove();
+                previousState = mousestate;
             }
             return true;
         }
@@ -141,7 +150,7 @@ namespace CS206Project
                 if(players[k].ULTIMATE_VICTOR)
                 {
                     ULTIMATE_VICTOR_DETERMINED = true;
-                    game.spriteBatch.DrawString(game.settings.font, players[k].name + "\nWINS", new Vector2(ULTIMATE_VICTOR_LOCATION.X, ULTIMATE_VICTOR_LOCATION.Y), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
+                    game.spriteBatch.DrawString(game.settings.font, players[k].name + "\nWON", new Vector2(ULTIMATE_VICTOR_LOCATION.X, ULTIMATE_VICTOR_LOCATION.Y), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
                     k = 4;
                 }
 

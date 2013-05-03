@@ -27,11 +27,7 @@ namespace CS206Project
 
         public Settings()
         {
-            // set default values
-            numCards = 8;
-            maxPlayers = 4;
-            playerName = "Ladeda";
-            currentBack = 2;
+
         }
         ~Settings()
         {
@@ -43,7 +39,7 @@ namespace CS206Project
             // set default values
             numCards = 8;
             maxPlayers = 4;
-            playerName = "ladeda";
+            playerName = "You";
             currentBack = 2;
 
             background = new Rectangle(0, 0, 780, 600);

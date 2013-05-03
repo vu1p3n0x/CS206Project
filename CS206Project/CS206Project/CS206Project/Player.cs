@@ -14,7 +14,6 @@ namespace CS206Project
         private bool validPlays;                        // true if the player can play the card in their hand, false if they must discard or bury
         private Card hand;                              // card the player is currently holding during their turn
         private bool hasDrawn;
-        MouseState previousState;
         private bool drewOrPlayed;
 
         //default constructor

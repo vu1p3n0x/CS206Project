@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-
+using Microsoft.Xna.Framework.Input;
 namespace CS206Project
 {
     abstract class PlayerBase
@@ -13,6 +13,7 @@ namespace CS206Project
         public List<Card> field;
         public bool hasWon = false;
         public bool ULTIMATE_VICTOR = false;
+        public MouseState previousState;
 
         // constructors and destructors
         public PlayerBase()
