@@ -150,7 +150,8 @@ namespace CS206Project
                 if(players[k].ULTIMATE_VICTOR)
                 {
                     ULTIMATE_VICTOR_DETERMINED = true;
-                    game.spriteBatch.DrawString(game.settings.font, players[k].name + "\nWON", new Vector2(ULTIMATE_VICTOR_LOCATION.X, ULTIMATE_VICTOR_LOCATION.Y), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
+                    game.spriteBatch.DrawString(game.settings.font, players[k].name + "\nWON", new Vector2(fields[k,0].X, fields[k,0].Y), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
+                    game.spriteBatch.DrawString(game.settings.font, "click anywhere to return to main screen", new Vector2(0, 0), Color.Black);
                     k = 4;
                 }
 
