@@ -23,6 +23,7 @@ namespace CS206Project
         public int currentPlayer;
         bool ULTIMATE_VICTOR_DETERMINED = false;
         bool previousStateSet = false;
+        bool sleepFlag = false;
 
         public override bool Initialize(Game1 game)
         {
@@ -150,9 +151,12 @@ namespace CS206Project
                 if(players[k].ULTIMATE_VICTOR)
                 {
                     ULTIMATE_VICTOR_DETERMINED = true;
-                    game.spriteBatch.DrawString(game.settings.font, players[k].name + "\nWON", new Vector2(fields[k,0].X, fields[k,0].Y), Color.Black, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
-                    game.spriteBatch.DrawString(game.settings.font, "click anywhere to return to main screen", new Vector2(0, 0), Color.Black);
+                    game.spriteBatch.DrawString(game.settings.font, players[k].name + " WON\n", new Vector2(0,0), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 0);
+                    game.spriteBatch.DrawString(game.settings.font, "click to return\nto main screen", new Vector2(0, 40), Color.Black);
                     k = 4;
+                    if (!sleepFlag)
+                        System.Threading.Thread.Sleep(500);
+                    sleepFlag = true;
                 }
 
             return true;
