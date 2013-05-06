@@ -14,7 +14,6 @@ namespace CS206Project
         private bool validPlays;                        // true if the player can play the card in their hand, false if they must discard or bury
         private Card hand;                              // card the player is currently holding during their turn
         private bool hasDrawn;
-        private bool drewOrPlayed;
         private MouseState mouseState;
         int location;
         //default constructor
@@ -31,7 +30,6 @@ namespace CS206Project
         public void turn(Game1 game, GameScreen gamescreen)
         {
             validPlays = true;
-            drewOrPlayed = false;
 
             if (!hasDrawn)
             {
@@ -100,14 +98,12 @@ namespace CS206Project
                     hand = gamescreen.deck_pop();
                     hand.show();
                     hasDrawn = true;
-                    drewOrPlayed = true;
 
                 }
                 else if (gamescreen.discard_location.Contains(clickLocation.X, clickLocation.Y))
                 {
                     hand = gamescreen.discardPile_pop();
                     hasDrawn = true;
-                    drewOrPlayed = true;
                 }
             }
             previousState = clickLocation;
@@ -130,7 +126,6 @@ namespace CS206Project
                             hand = temp;
                             hand.show();
                             i = maxCards + 1;
-                            drewOrPlayed = true;
 
 
                     }
