@@ -19,7 +19,7 @@ namespace CS206Project
         public Texture2D images;
         public Texture2D table;
         public Texture2D pixel;
-
+        public Texture2D options_table;
         public int currentBack;
 
         public SpriteFont font;
@@ -50,6 +50,7 @@ namespace CS206Project
         {
             // load images
             images = game.Content.Load<Texture2D>("card_images");
+            options_table = game.Content.Load<Texture2D>("Options_background");
             table = game.Content.Load<Texture2D>("Table_top copy");
             pixel = game.Content.Load<Texture2D>("pixel");
 

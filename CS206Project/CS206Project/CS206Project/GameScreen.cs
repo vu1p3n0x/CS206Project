@@ -12,7 +12,7 @@ namespace CS206Project
     {
         public List<Card> deck = new List<Card>();
         public List<Card> discardPile = new List<Card>();
-
+        public Rectangle[] nameFields;
         public Rectangle[,] fields;
         public Rectangle deck_location;
         public Rectangle discard_location;
@@ -28,6 +28,8 @@ namespace CS206Project
         public override bool Initialize(Game1 game)
         {
             fields = new Rectangle[4,8];//current allowed max players
+            nameFields = new Rectangle[4];
+            nameFields[0] = new Rectangle(200, 550, 0, 0);
             fields[0, 0] = new Rectangle(250, 375, 70, 100);
             fields[0, 1] = new Rectangle(325, 375, 70, 100);
             fields[0, 2] = new Rectangle(400, 375, 70, 100);
@@ -37,6 +39,7 @@ namespace CS206Project
             fields[0, 6] = new Rectangle(400, 480, 70, 100);
             fields[0, 7] = new Rectangle(475, 480, 70, 100);
 
+            nameFields[1] = new Rectangle(60, 460, 0, 0);
             fields[1, 0] = new Rectangle(225, 150, 70, 100);
             fields[1, 1] = new Rectangle(225, 225, 70, 100);
             fields[1, 2] = new Rectangle(225, 300, 70, 100);
@@ -46,6 +49,7 @@ namespace CS206Project
             fields[1, 6] = new Rectangle(120, 300, 70, 100);
             fields[1, 7] = new Rectangle(120, 375, 70, 100);
 
+            nameFields[2] = new Rectangle(550, 20, 0, 0);
             fields[2, 0] = new Rectangle(250, 20, 70, 100);
             fields[2, 1] = new Rectangle(325, 20, 70, 100);
             fields[2, 2] = new Rectangle(400, 20, 70, 100);
@@ -55,6 +59,7 @@ namespace CS206Project
             fields[2, 6] = new Rectangle(400, 125, 70, 100);
             fields[2, 7] = new Rectangle(475, 125, 70, 100);
 
+            nameFields[3] = new Rectangle(655, 110, 0, 0);
             fields[3, 0] = new Rectangle(655, 150, 70, 100);
             fields[3, 1] = new Rectangle(655, 225, 70, 100);
             fields[3, 2] = new Rectangle(655, 300, 70, 100);
@@ -145,13 +150,19 @@ namespace CS206Project
             else
                 Card.Blank.Draw(game, discard_location);
 
+            //drawing names of players
+            game.spriteBatch.DrawString(game.settings.font, players[0].name, new Vector2(nameFields[0].X, nameFields[0].Y), Color.Black);
+            game.spriteBatch.DrawString(game.settings.font, players[1].name, new Vector2(nameFields[1].X, nameFields[1].Y), Color.Black);
+            game.spriteBatch.DrawString(game.settings.font, players[2].name, new Vector2(nameFields[2].X, nameFields[2].Y), Color.Black);
+            game.spriteBatch.DrawString(game.settings.font, players[3].name, new Vector2(nameFields[3].X, nameFields[3].Y), Color.Black);
+
             players[currentPlayer].Draw(game, time);
 
             for(int k = 0; k < 4; k++)
                 if(players[k].ULTIMATE_VICTOR)
                 {
                     ULTIMATE_VICTOR_DETERMINED = true;
-                    game.spriteBatch.DrawString(game.settings.font, players[k].name + " WON\n", new Vector2(0,0), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 0);
+                    game.spriteBatch.DrawString(game.settings.font, players[k].name + " Won\n", new Vector2(0,0), Color.Black, 0, Vector2.Zero, 2, SpriteEffects.None, 0);
                     game.spriteBatch.DrawString(game.settings.font, "click to return\nto main screen", new Vector2(0, 40), Color.Black);
                     k = 4;
                     if (!sleepFlag)

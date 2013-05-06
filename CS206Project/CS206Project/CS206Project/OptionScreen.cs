@@ -71,9 +71,8 @@ namespace CS206Project
         public override bool Draw(Game1 game, Microsoft.Xna.Framework.GameTime time)
         {
             Card temp;
-
             // draw background
-            game.spriteBatch.Draw(game.settings.table, game.settings.background, new Color(255, 255, 255, 220));
+            game.spriteBatch.Draw(game.settings.options_table, game.settings.background, new Color(255, 255, 255, 255));
 
             // draw back button
             game.spriteBatch.Draw(game.settings.pixel, backButton, Color.White);
@@ -116,7 +115,8 @@ namespace CS206Project
                     game.spriteBatch.Draw(game.settings.pixel, new Rectangle(48 + 40 * i, 343, 24, 24), Color.White);
                 game.spriteBatch.DrawString(game.settings.font, (i + 1).ToString(), new Vector2(54 + 40 * i, 342), Color.Black);
             }
-
+            //printing rules
+            game.spriteBatch.DrawString(game.settings.font, "RULES \n1.Obtain Ace through 8 face up\n  on the field.\n2.Jacks are wild.\n3.Draw from discard pile or deck\n  to start.\n4.If the card is a number you need,\n  swap with facedown card\n  in that position,\n  Ace is top left, 8 is bottom right.\n5.Your turn ends when you can't play\n  and must discard a card.\n6.If the player on your left\n  needs the card you have,\n  you can bury it in a\n  facedown location.\n7.When a round ends,\n  each player who won needs 1 less\n  card and the next round begins.\n8.Game ends when a player is\n  at zero cards needed to win. ", new Vector2(380, 40), Color.Black);
             return true;
         }
 
